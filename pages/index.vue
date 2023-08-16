@@ -1,3 +1,5 @@
 <template>
-  <p>Haha)))</p>
+  <div></div>
 </template>
+
+<style></style>

@@ -9,10 +9,10 @@ module.exports = {
     parser: "@typescript-eslint/parser",
   },
   extends: ["@nuxtjs/eslint-config-typescript", "plugin:prettier/recommended"],
-  plugins: [],
+  plugins: ["prettier"],
   rules: {
     semi: ["error", "always"],
-    quotes: ["error", "double"],
+    quotes: ["error", "double", { avoidEscape: true }],
     "vue/multi-word-component-names": "off",
   },
 };
