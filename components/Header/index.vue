@@ -6,7 +6,7 @@ import Burger from "./Burger.vue";
   <header class="header">
     <!-- <div class="container"> -->
     <div class="header__inner">
-      <img src="@/assets/svg/logo.svg" alt="logo" />
+      <img class="logo" src="@/assets/svg/logo.svg" alt="logo" />
       <Burger></Burger>
     </div>
     <!-- </div> -->
@@ -14,8 +14,6 @@ import Burger from "./Burger.vue";
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/styles/vars.scss";
-
 .header {
   min-height: 68px;
 }
@@ -30,6 +28,11 @@ import Burger from "./Burger.vue";
 
   @media screen and (min-width: $vp-mobile) {
     padding: 20px 24px;
+  }
+
+  .logo {
+    width: 83px;
+    height: 44px;
   }
 }
 </style>

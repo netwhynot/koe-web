@@ -2,19 +2,28 @@
 import { fileURLToPath, URL } from "node:url";
 
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  // devtools: { enabled: true },
   app: {
     head: {
+      htmlAttrs: {
+        lang: "uk",
+      },
       title: "Kyiv osu! Event | KOE",
+      meta: [
+        {
+          name: "description",
+          content: "Kyiv osu! Event Website",
+        },
+      ],
       link: [{ rel: "icon", href: "/logo.svg" }],
     },
   },
-  css: ["@/assets/styles/main.scss", "@/assets/styles/normalize.css"],
+  css: ["@/assets/styles/normalize.css", "@/assets/styles/main.scss"],
   vite: {
     css: {
       preprocessorOptions: {
-        sass: {
-          // additionalData: '@import "@/assets/vars.scss";',
+        scss: {
+          additionalData: '@import "@/assets/styles/vars.scss";',
         },
       },
     },
