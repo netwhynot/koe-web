@@ -100,6 +100,7 @@ const isActive = ref(false);
     bottom: 0;
     left: 100%;
     right: 0;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;

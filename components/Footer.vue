@@ -1,17 +1,26 @@
 <script lang="ts" setup>
-const linksAxis = ref("vertical");
+const width: Ref<number> = ref(0);
 
-if (process.client) {
-  if (window.innerWidth >= 480) {
-    linksAxis.value = "horizontal";
-  }
-}
+const changeAxis = () => {
+  width.value = window.innerWidth;
+};
+
+onMounted(() => {
+  width.value = window.innerWidth;
+  window.addEventListener("resize", changeAxis);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", changeAxis);
+});
 </script>
 
 <template>
   <footer class="footer">
     <div class="footer__inner">
-      <AdditionalLinks :axis="linksAxis"></AdditionalLinks>
+      <AdditionalLinks
+        :axis="width < 480 ? 'vertical' : 'horizontal'"
+      ></AdditionalLinks>
       <ul class="menu">
         <li class="menu__link">
           <NuxtLink to="/">Головна</NuxtLink>
@@ -88,7 +97,8 @@ if (process.client) {
 .copyright {
   color: $secondary;
   font-family: "Mulish";
-  font-size: 10px;
+  // size is 10 in design but i raised it to 12 for accessibility score
+  font-size: 12px;
   font-style: normal;
   font-weight: 300;
   line-height: normal;

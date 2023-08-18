@@ -3,6 +3,9 @@ import { fileURLToPath, URL } from "node:url";
 
 export default defineNuxtConfig({
   // devtools: { enabled: true },
+  nitro: {
+    preset: "node-server",
+  },
   app: {
     head: {
       htmlAttrs: {

@@ -7,15 +7,27 @@ const props = defineProps({
   },
 });
 
-const style: { flexDirection: string; gap: string } = {
+const style: Ref<{ flexDirection: string; gap: string }> = ref({
   flexDirection: "row",
   gap: "20px",
-};
+});
 
-if (props.axis === "vertical") {
-  style.flexDirection = "column";
-  style.gap = "12px";
-}
+onMounted(() => {
+  if (props.axis === "vertical") {
+    style.value.flexDirection = "column";
+    style.value.gap = "12px";
+  }
+});
+
+onUpdated(() => {
+  if (props.axis === "vertical") {
+    style.value.flexDirection = "column";
+    style.value.gap = "12px";
+  } else {
+    style.value.flexDirection = "row";
+    style.value.gap = "20px";
+  }
+});
 </script>
 
 <template>

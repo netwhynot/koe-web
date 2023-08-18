@@ -4,18 +4,19 @@ import Burger from "./Burger.vue";
 
 <template>
   <header class="header">
-    <!-- <div class="container"> -->
     <div class="header__inner">
       <img class="logo" src="@/assets/svg/logo.svg" alt="logo" />
       <Burger></Burger>
     </div>
-    <!-- </div> -->
   </header>
 </template>
 
 <style lang="scss" scoped>
 .header {
   min-height: 68px;
+  position: sticky;
+  top: 0;
+  z-index: 5;
 }
 
 .header__inner {
@@ -24,7 +25,6 @@ import Burger from "./Burger.vue";
   align-items: center;
   padding: 12px 20px;
   background-color: $darkd;
-  // transition: all 0.2s ease;
 
   @media screen and (min-width: $vp-mobile) {
     padding: 20px 24px;
