@@ -180,7 +180,7 @@ const tickets = [
   display: flex;
   justify-content: center;
   padding: 56px 0 160px 0;
-  background: url("@/assets/svg/mobile-bg-shape2.svg") no-repeat;
+  background: url("@/assets/svg/mobile-bg-shape2.svg") no-repeat center;
 
   @media screen and (min-width: $vp-mobile) {
     display: block;
