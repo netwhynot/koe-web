@@ -134,6 +134,8 @@ const props = defineProps({
 }
 
 .disable-line {
-  display: none !important;
+  @media screen and (min-width: $vp-mobile) {
+    display: none !important;
+  }
 }
 </style>

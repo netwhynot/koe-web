@@ -125,9 +125,8 @@ onUnmounted(() => {
 .bg {
   position: relative;
   z-index: 0;
+  background: url("@/assets/svg/mobile-bg-shape1.svg") no-repeat center top;
   background-color: $dark;
-  background-image: url("@/assets/svg/mobile-bg-shape1.svg");
-  background-repeat: no-repeat;
 }
 
 .hero {

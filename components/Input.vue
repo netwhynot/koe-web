@@ -97,8 +97,8 @@ const submitInput = () => {};
 
 .input {
   display: block;
-  min-width: 248px;
-  padding: 12px 16px;
+  min-width: 240px;
+  padding: 12.1px 16px;
   margin: 0;
   border: 0;
   border-radius: 0;
@@ -113,7 +113,7 @@ const submitInput = () => {};
   transition: all 0.2s ease;
 
   @media screen and (min-width: $vp-mobile) {
-    padding: 14.5px 20px;
+    padding: 14.7px 20px;
     min-width: 280px;
   }
 

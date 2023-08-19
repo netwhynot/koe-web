@@ -41,7 +41,7 @@ const isActive = ref(false);
           >
         </li>
         <li class="menu__link">
-          <NuxtLink to="/organizers" @click="isActive = !isActive"
+          <NuxtLink to="/staff" @click="isActive = !isActive"
             >організатори</NuxtLink
           >
         </li>
@@ -154,9 +154,6 @@ const isActive = ref(false);
 }
 
 .ontop {
-  position: fixed;
-  overflow: hidden;
-
   .burger__line:nth-child(1) {
     transform: rotate(45deg);
   }
