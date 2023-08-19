@@ -6,6 +6,10 @@ const props = defineProps({
     type: String, // email | discord | telegram
     required: true,
   },
+  inputType: {
+    type: String,
+    required: true,
+  },
 });
 
 const input: Ref<HTMLInputElement | null> = ref(null);
@@ -25,7 +29,7 @@ const submitInput = () => {};
       ref="input"
       class="input"
       :disabled="isDisabled"
-      type="text"
+      :type="props.inputType"
       @focusout="isDisabled = !isDisabled"
     />
     <button class="icon edit-icon" @click="editInput"></button>

@@ -44,23 +44,35 @@ const tickets = [
     </div>
     <div class="tabs__content">
       <div class="container">
-        <div v-show="tab === 1" class="content content__settings">
+        <div v-if="tab === 1" class="content content__settings">
           <form class="form" @submit.prevent>
             <div>
               <label class="form__label">Електронна пошта</label>
-              <Input class="form__input" icon="email" />
+              <SettingsInput
+                class="form__input"
+                icon="email"
+                input-type="email"
+              />
             </div>
             <div>
               <label class="form__label">Discord</label>
-              <Input class="form__input" icon="discord" />
+              <SettingsInput
+                class="form__input"
+                icon="discord"
+                input-type="text"
+              />
             </div>
             <div>
               <label class="form__label">Telegram</label>
-              <Input class="form__input" icon="telegram" />
+              <SettingsInput
+                class="form__input"
+                icon="telegram"
+                input-type="text"
+              />
             </div>
           </form>
         </div>
-        <div v-show="tab === 2" class="content content__tickets">
+        <div v-if="tab === 2" class="content content__tickets">
           <Ticket
             v-for="ticket of tickets"
             :key="ticket.id"
