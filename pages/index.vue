@@ -37,7 +37,18 @@ onUnmounted(() => {
     <div class="time-left-bg">
       <div class="container time-left">
         <p class="time-left__text">Кінець продажу:</p>
-        <span class="time-left__text">27 : 22 : 53 : 12</span>
+        <ClientOnly>
+          <vue-countdown
+            v-slot="{ days, hours, minutes, seconds }"
+            class="time-left__text"
+            :time="
+              new Date(2023, 7, 25, 24, 0, 0).getTime() - new Date().getTime()
+            "
+          >
+            {{ days }} днів, {{ hours }} годин, {{ minutes }} хвилин,
+            {{ seconds }} секунд
+          </vue-countdown>
+        </ClientOnly>
       </div>
     </div>
     <div class="container buttons-wrapper" :class="{ display: width < 480 }">

@@ -3,9 +3,15 @@ import { fileURLToPath, URL } from "node:url";
 
 export default defineNuxtConfig({
   // devtools: { enabled: true },
+  runtimeConfig: {
+    mongoose: {
+      url: process.env.MONGO_URL,
+    },
+  },
   nitro: {
     preset: "node-server",
     compressPublicAssets: true,
+    plugins: ["~/server/index.ts"],
   },
   app: {
     head: {
@@ -17,6 +23,22 @@ export default defineNuxtConfig({
         {
           name: "description",
           content: "Kyiv osu! Event Website",
+        },
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1",
+        },
+        {
+          name: "og:title",
+          content: "Kyiv osu! Event | KOE",
+        },
+        {
+          name: "og:description",
+          content: "Kyiv osu! Event Website",
+        },
+        {
+          name: "og:image",
+          content: "https://kyivosuevent.com/logo.svg",
         },
       ],
       link: [{ rel: "icon", href: "/logo.svg" }],
