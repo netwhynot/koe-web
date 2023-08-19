@@ -14,5 +14,6 @@ module.exports = {
     semi: ["error", "always"],
     quotes: ["error", "double", { avoidEscape: true }],
     "vue/multi-word-component-names": "off",
+    "comma-dangle": ["error", "always-multiline"],
   },
 };

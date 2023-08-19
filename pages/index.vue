@@ -124,9 +124,9 @@ onUnmounted(() => {
 <style lang="scss" scoped>
 .bg {
   position: relative;
-  z-index: -1;
+  z-index: 0;
   background-color: $dark;
-  background-image: url("@/assets/svg/home-bg-mob.svg");
+  background-image: url("@/assets/svg/mobile-bg-shape1.svg");
   background-repeat: no-repeat;
 }
 

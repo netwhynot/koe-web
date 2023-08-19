@@ -1,0 +1,35 @@
+@mixin rounded-hex(
+  $main-radius: 30%,
+  $rounding-radius: 10%,
+  $rotated: false,
+  $precision: 20
+) {
+  $n: 6;
+  $central-angle: calc(360deg / $n);
+  $angle: calc(($n - 2) * 180deg / $n);
+  $max-var-angle: 2 * (90deg - calc($angle/2));
+  $precision: 6;
+  $unit-var-angle: calc($max-var-angle/$precision);
+
+  $r-diff: $main-radius + $rounding-radius;
+
+  $points: ();
+
+  @for $i from 0 to $n {
+    $vertex-angle: $i * $central-angle + if($rotated, -90deg, 0deg);
+    $vertex-x: 50% + $r-diff * cos($vertex-angle);
+    $vertex-y: 50% + $r-diff * sin($vertex-angle);
+
+    @for $j from 0 through $precision {
+      $curr-angle: $vertex-angle + ($j - 0.5 * $precision) * $unit-var-angle;
+      $x: $vertex-x + $rounding-radius * cos($curr-angle);
+      $y: $vertex-y + $rounding-radius * sin($curr-angle);
+
+      $points:
+        $points,
+        $x $y;
+    }
+  }
+
+  clip-path: polygon($points);
+}

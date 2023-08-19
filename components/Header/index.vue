@@ -5,7 +5,9 @@ import Burger from "./Burger.vue";
 <template>
   <header class="header">
     <div class="header__inner">
-      <img class="logo" src="@/assets/svg/logo.svg" alt="logo" />
+      <NuxtLink to="/"
+        ><img class="logo" src="@/assets/svg/logo.svg" alt="logo"
+      /></NuxtLink>
       <Burger></Burger>
     </div>
   </header>
