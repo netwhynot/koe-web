@@ -2,7 +2,7 @@
 import { fileURLToPath, URL } from "node:url";
 
 export default defineNuxtConfig({
-  // devtools: { enabled: true },
+  devtools: { enabled: true },
   nitro: {
     preset: "node-server",
     compressPublicAssets: true,
