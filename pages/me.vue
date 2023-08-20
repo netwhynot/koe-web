@@ -1,19 +1,20 @@
 <script lang="ts" setup>
-// import ky from "ky";
+import ky from "ky";
 // import { IUser } from "@/interfaces/user.interface";
-import { ITickets } from "@/interfaces/inventory.interface";
+import { ticketSchema } from "server/dbModels/ticket";
+import
 
 const tab: Ref<number> = ref(1);
 const modalIsActive: Ref<boolean> = ref(false);
-const tickets: Ref<ITickets[]> = ref([]);
+const tickets: Ref<(typeof ticketSchema)[]> = ref([]);
 
-// onMounted(async () => {
-//   const json: IUser = await ky
-//     .get("http://localhost:3000/api/users/64e0d9b94933dd0fa10e3fe6")
-//     .json();
+onMounted(async () => {
 
-//   tickets.value = json.inventory.tickets;
-// });
+  const json:  = await $fetch("http://localhost:3000/api/users/64e0d9b94933dd0fa10e3fe6")
+
+  tickets.value = json.inventory.;
+});
+
 //   { type: "Participant", price: 3213213, description: "" },
 //   { type: "Staff", price: 312321, description: "" },
 //   { type: "VIP", price: 33222, description: "" },
