@@ -12,7 +12,7 @@ const props = defineProps({
 
 const isVIP: Ref<boolean> = ref(props.ticketType === "VIP");
 const isGift: Ref<boolean> = ref(
-  // eslint-disable-next-line comma-dangle, prettier/prettier
+  // eslint-disable-next-line prettier/prettier
   props.gift && Object.keys(props.gift).length !== 0
 );
 
