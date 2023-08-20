@@ -15,7 +15,6 @@ import Burger from "./Burger.vue";
 
 <style lang="scss" scoped>
 .header {
-  min-height: 68px;
   position: sticky;
   top: 0;
   z-index: 5;
@@ -25,11 +24,17 @@ import Burger from "./Burger.vue";
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 44px;
   padding: 12px 20px;
   background-color: $darkd;
 
   @media screen and (min-width: $vp-mobile) {
     padding: 20px 24px;
+    height: 60px;
+  }
+
+  @media screen and (min-width: $vp-desktop) {
+    height: 49px;
   }
 
   .logo {

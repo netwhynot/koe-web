@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     plugins: ["~/server/index.ts"],
   },
+  modules: ["@pinia/nuxt"],
   app: {
     head: {
       htmlAttrs: {
