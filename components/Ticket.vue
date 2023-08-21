@@ -24,14 +24,10 @@ const props = defineProps({
 const isVIP: Ref<boolean> = ref(props.ticket.type === "VIP");
 
 const ticketStyles: { [key: string]: { html: string; color: string } } = {
-  Participant: { html: "Учасник", color: "#5662f6" },
+  Spectator: { html: "Учасник", color: "#5662f6" },
   Player: { html: "Гравець", color: "#6441a4" },
   VIP: { html: "VIP", color: "#d31717" },
 };
-
-onMounted(() => {
-  console.log(props);
-});
 </script>
 
 <template>
@@ -71,6 +67,11 @@ onMounted(() => {
     height: 628px;
   }
 
+  @media screen and (min-width: $vp-tlandscape) {
+    width: 280px;
+    height: 429px;
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -86,6 +87,10 @@ onMounted(() => {
     @media screen and (min-width: $vp-mobile) {
       border-width: 0 0 80px 80px;
     }
+
+    @media screen and (min-width: $vp-tlandscape) {
+      border-width: 0 0 56px 56px;
+    }
   }
 
   &__inner {
@@ -94,6 +99,10 @@ onMounted(() => {
 
     @media screen and (min-width: $vp-mobile) {
       padding: 76px 24px;
+    }
+
+    @media screen and (min-width: $vp-tlandscape) {
+      padding: 40px 20px;
     }
   }
 
@@ -107,6 +116,11 @@ onMounted(() => {
       width: 280px;
       height: 280px;
     }
+
+    @media screen and (min-width: $vp-tlandscape) {
+      width: 200px;
+      height: 200px;
+    }
   }
 
   &__headings {
@@ -119,6 +133,10 @@ onMounted(() => {
 
     @media screen and (min-width: $vp-mobile) {
       margin-top: 66px;
+    }
+
+    @media screen and (min-width: $vp-tlandscape) {
+      margin-top: 36px;
     }
   }
 
@@ -137,6 +155,11 @@ onMounted(() => {
     @media screen and (min-width: $vp-mobile) {
       font-size: 28px;
       letter-spacing: 2.8px;
+    }
+
+    @media screen and (min-width: $vp-tlandscape) {
+      font-size: 18px;
+      letter-spacing: 1.8px;
     }
 
     &::after,
@@ -171,6 +194,10 @@ onMounted(() => {
     @media screen and (min-width: $vp-mobile) {
       font-size: 18px;
     }
+
+    @media screen and (min-width: $vp-tlandscape) {
+      font-size: 16px;
+    }
   }
 
   &__type {
@@ -196,6 +223,10 @@ onMounted(() => {
   @media screen and (min-width: $vp-mobile) {
     font-size: 18px;
   }
+
+  @media screen and (min-width: $vp-tlandscape) {
+    font-size: 16px;
+  }
 }
 
 .gift__name {
@@ -214,6 +245,11 @@ onMounted(() => {
     font-size: 18px;
     max-width: 224px;
   }
+
+  @media screen and (min-width: $vp-tlandscape) {
+    font-size: 16px;
+    max-width: 90px;
+  }
 }
 
 .remove {
@@ -226,6 +262,10 @@ onMounted(() => {
   @media screen and (min-width: $vp-mobile) {
     margin-bottom: 28px;
   }
+
+  // @media screen and (min-width: $vp-tlandscape) {
+  //   margin-top: 12px;
+  // }
 }
 
 .vip {
@@ -242,6 +282,11 @@ onMounted(() => {
       width: 16px;
       height: 3px;
     }
+
+    @media screen and (min-width: $vp-tlandscape) {
+      width: unset;
+      height: 2px;
+    }
   }
 
   &::after {
@@ -250,6 +295,10 @@ onMounted(() => {
     @media screen and (min-width: $vp-mobile) {
       left: calc(100% + 16px);
     }
+
+    @media screen and (min-width: $vp-tlandscape) {
+      left: calc(100% + 8px);
+    }
   }
 
   &::before {
@@ -257,6 +306,10 @@ onMounted(() => {
 
     @media screen and (min-width: $vp-mobile) {
       right: calc(100% + 16px);
+    }
+
+    @media screen and (min-width: $vp-tlandscape) {
+      right: calc(100% + 8px);
     }
   }
 }

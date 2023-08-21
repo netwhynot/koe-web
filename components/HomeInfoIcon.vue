@@ -54,6 +54,11 @@ const props = defineProps({
     background-color: $dark;
   }
 
+  @media screen and (min-width: $vp-tablet) {
+    width: 96px;
+    height: 96px;
+  }
+
   .circle__inner {
     position: absolute;
     top: 50%;
@@ -69,6 +74,11 @@ const props = defineProps({
     @media screen and (min-width: $vp-mobile) {
       width: 44px;
       height: 44px;
+    }
+
+    @media screen and (min-width: $vp-tablet) {
+      width: 56px;
+      height: 56px;
     }
   }
 

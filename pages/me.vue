@@ -14,9 +14,6 @@ onMounted(async () => {
   ownTickets.value = data.inventory.tickets;
   giftedTickets.value = data.inventory.gifts;
 });
-
-//   { type: "Participant", price: 3213213, description: "" },
-//   { type: "VIP", price: 33222, description: "" },
 </script>
 
 <template>
@@ -46,7 +43,7 @@ onMounted(async () => {
       <h2 class="account__name">alowave23</h2>
     </div>
     <div class="tabs-bg">
-      <div class="container">
+      <div class="container tabs__container">
         <div class="tabs-wrapper">
           <ul class="tabs">
             <li
@@ -69,8 +66,8 @@ onMounted(async () => {
       </div>
     </div>
     <div class="tabs__content">
-      <div class="container">
-        <div v-if="tab === 1" class="content content__settings">
+      <div v-if="tab === 1" class="container">
+        <div class="content content__settings">
           <form class="form" @submit.prevent>
             <div>
               <label class="form__label">Електронна пошта</label>
@@ -98,8 +95,9 @@ onMounted(async () => {
             </div>
           </form>
         </div>
-        <div v-if="tab === 2" class="content content__tickets">
-          <!-- <Ticket v-for="ticket of tickets" :key="ticket.ticket" /> -->
+      </div>
+      <div v-if="tab === 2" class="container tickets-container">
+        <div class="content content__tickets">
           <div
             v-if="ownTickets.length <= 0 && giftedTickets.length <= 0"
             class="no-tickets"
@@ -107,21 +105,19 @@ onMounted(async () => {
             <p>Схоже, у Вас ще немає жодного квитка</p>
             <NuxtLink to="/buy">купити квиток</NuxtLink>
           </div>
-          <div v-else>
-            <Ticket
-              v-for="ticket of ownTickets"
-              :key="new Date(ticket.createdAt).getTime()"
-              :ticket="ticket.ticket"
-              :ticket-type="ticket.ticket.type"
-            />
-            <Ticket
-              v-for="ticket of giftedTickets"
-              :key="new Date(ticket.giftedAt).getTime()"
-              :ticket="ticket.ticket"
-              :is-gift="true"
-              :ticket-type="ticket.ticket.type"
-            />
-          </div>
+          <Ticket
+            v-for="ticket of ownTickets"
+            :key="new Date(ticket.createdAt).getTime()"
+            :ticket="ticket.ticket"
+            :ticket-type="ticket.ticket.type"
+          />
+          <Ticket
+            v-for="ticket of giftedTickets"
+            :key="new Date(ticket.giftedAt).getTime()"
+            :ticket="ticket.ticket"
+            :is-gift="true"
+            :ticket-type="ticket.ticket.type"
+          />
         </div>
       </div>
     </div>
@@ -138,6 +134,10 @@ onMounted(async () => {
   align-items: center;
   gap: 12px;
   padding: 16px;
+
+  @media screen and (min-width: $vp-desktop) {
+    max-width: 1180px;
+  }
 
   &__pic {
     display: inline-block;
@@ -202,6 +202,12 @@ onMounted(async () => {
       letter-spacing: 1.4px;
     }
   }
+
+  &__container {
+    @media screen and (min-width: $vp-desktop) {
+      max-width: 1180px;
+    }
+  }
 }
 
 .logout-btn {
@@ -235,18 +241,29 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   padding: 56px 0 160px 0;
-  background: url("@/assets/svg/mobile-bg-shape2.svg") no-repeat center;
+  background: url("@/assets/svg/mobile-bg-shape2.svg") no-repeat;
 
   @media screen and (min-width: $vp-mobile) {
     display: block;
     padding: 76px 0 200px 0;
+  }
+
+  @media screen and (min-width: calc($vp-mobile + 10px)) {
+    display: block;
+    padding: 76px 0 200px 0;
+    background: url("@/assets/svg/desktop-bg-shape1.svg") no-repeat top;
   }
 }
 
 .form {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   gap: 20px;
+
+  @media screen and (min-width: $vp-mobile) {
+    max-width: 432px;
+  }
 
   &__label {
     color: $white;
@@ -265,6 +282,12 @@ onMounted(async () => {
   }
 }
 
+.tickets-container {
+  @media screen and (min-width: $vp-desktop) {
+    max-width: 1180px;
+  }
+}
+
 .content__tickets {
   display: flex;
   flex-direction: column;
@@ -273,10 +296,20 @@ onMounted(async () => {
   @media screen and (min-width: $vp-mobile) {
     gap: 40px;
   }
+
+  @media screen and (min-width: $vp-tablet) {
+    gap: 16.5px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: $vp-tlandscape) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
 
 .no-tickets {
-  margin: 24px 0 156px 0;
+  margin: 24px auto 156px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -284,11 +317,11 @@ onMounted(async () => {
 
   @media screen and (min-width: $vp-mobile) {
     gap: 20px;
-    margin: 124px 0 170px 0;
+    margin: 124px auto 170px;
   }
 
   @media screen and (min-width: $vp-desktop) {
-    margin: 124px 0 150px 0;
+    margin: 124px auto 150px;
   }
 
   & > p {
