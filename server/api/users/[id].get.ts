@@ -1,4 +1,6 @@
-import { inventory, user } from "../../dbModels";
+import { IInventoryGift, IInventoryTicket } from "@/server/dbModels/inventory";
+import { inventory, user } from "@/server/dbModels";
+import ticket from "@/server/dbModels/ticket";
 
 export default defineEventHandler(async (event) => {
   const userId = event.context.params?.id;
@@ -12,12 +14,41 @@ export default defineEventHandler(async (event) => {
       .findOne({
         owner: userId,
       })
-      .populate({
-        path: "tickets",
-        populate: {
-          path: "ticket",
+      .select("-owner -__v");
+
+    userInventory!.tickets = await Promise.all(
+      userInventory!.tickets.map<Promise<IInventoryTicket>>(
+        async (inventoryTicket) => {
+          const databaseTicket = await ticket.findOne({
+            _id: inventoryTicket.ticket,
+          });
+
+          if (databaseTicket)
+            return {
+              ...inventoryTicket,
+              ticket: databaseTicket,
+            };
+          else return inventoryTicket;
         },
-      });
+      ),
+    );
+
+    userInventory!.gifts = await Promise.all(
+      userInventory!.gifts.map<Promise<IInventoryGift>>(
+        async (inventoryGift) => {
+          const databaseTicket = await ticket.findOne({
+            _id: inventoryGift.ticket,
+          });
+
+          if (databaseTicket)
+            return {
+              ...inventoryGift,
+              ticket: databaseTicket,
+            };
+          else return inventoryGift;
+        },
+      ),
+    );
 
     userData!.inventory = userInventory!;
 
@@ -41,6 +72,7 @@ export default defineEventHandler(async (event) => {
     }
   } catch (err) {
     event.node.res.statusCode = 500;
+
     return {
       code: "ERROR",
       message: err,
