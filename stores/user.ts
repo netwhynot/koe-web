@@ -1,10 +1,12 @@
 import { defineStore } from "pinia";
-import { IUserState } from "../interfaces/user.interface";
+import { IUserStore } from "@/interfaces/userStore.interface";
 
 export const useUserStore = defineStore("user", {
   state: () =>
     ({
       isLoggedIn: true,
       user: {},
-    }) as IUserState,
+      osuUser: {},
+    }) as IUserStore,
+  persist: true,
 });

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { IUser } from "@/server/dbModels/user";
 import { IInventoryTicket, IInventoryGift } from "@/server/dbModels/inventory";
+import { ITicket } from "server/dbModels/ticket";
 
 const tab: Ref<number> = ref(1);
 const modalIsActive: Ref<boolean> = ref(false);
@@ -108,15 +109,15 @@ onMounted(async () => {
           <Ticket
             v-for="ticket of ownTickets"
             :key="new Date(ticket.createdAt).getTime()"
-            :ticket="ticket.ticket"
-            :ticket-type="ticket.ticket.type"
+            :ticket="<ITicket>ticket.ticket"
+            :ticket-type="(<ITicket>ticket.ticket).type"
           />
           <Ticket
             v-for="ticket of giftedTickets"
             :key="new Date(ticket.giftedAt).getTime()"
-            :ticket="ticket.ticket"
+            :ticket="<ITicket>ticket.ticket"
             :is-gift="true"
-            :ticket-type="ticket.ticket.type"
+            :ticket-type="(<ITicket>ticket.ticket).type"
           />
         </div>
       </div>

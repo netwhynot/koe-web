@@ -3,20 +3,20 @@ import { IUser } from "./user";
 import { ITicket } from "./ticket";
 
 export interface IInventoryTicket {
-  ticket: ITicket;
+  ticket: ITicket | Types.ObjectId;
   isGifted: boolean;
   createdAt: Date;
 }
 
 export interface IInventoryGift {
-  ticket: ITicket;
-  to: IUser;
-  from: IUser;
+  ticket: ITicket | Types.ObjectId;
+  to: IUser | Types.ObjectId;
+  from: IUser | Types.ObjectId;
   giftedAt: Date;
 }
 
 export interface IInventory {
-  owner: IUser;
+  owner: IUser | Types.ObjectId;
   tickets: IInventoryTicket[];
   gifts: IInventoryGift[];
 }

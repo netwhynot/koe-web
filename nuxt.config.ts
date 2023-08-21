@@ -7,13 +7,18 @@ export default defineNuxtConfig({
     mongoose: {
       url: process.env.MONGO_URL,
     },
+    osu: {
+      clientId: process.env.OSU_CLIENT_ID,
+      clientSecret: process.env.OSU_CLIENT_SECRET,
+      redirectUri: process.env.OSU_REDIRECT_URI,
+    },
   },
   nitro: {
     preset: "node-server",
     compressPublicAssets: true,
     plugins: ["~/server/index.ts"],
   },
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
   app: {
     head: {
       htmlAttrs: {
