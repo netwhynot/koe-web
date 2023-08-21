@@ -89,6 +89,10 @@ const openModal = () => {
   height: 30px;
   margin-left: 20px;
 
+  @media screen and (min-width: $vp-tlandscape) {
+    display: none;
+  }
+
   &__inner {
     position: absolute;
     padding: 15px;

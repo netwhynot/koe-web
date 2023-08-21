@@ -35,6 +35,11 @@ const props = defineProps({
     width: 80px;
     height: 80px;
   }
+
+  @media screen and (min-width: $vp-tablet) {
+    width: 100px;
+    height: 100px;
+  }
 }
 
 .circle {

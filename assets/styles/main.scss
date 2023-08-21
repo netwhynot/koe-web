@@ -60,6 +60,11 @@ body {
     max-width: 875px;
     padding: 0 24px;
   }
+
+  @media screen and (min-width: $vp-desktop) {
+    max-width: 1160px;
+    padding: 0 24px;
+  }
 }
 
 a {

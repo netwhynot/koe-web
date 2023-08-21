@@ -72,7 +72,7 @@ onUpdated(() => {});
                 <span class="ticket__type-wrapper vip">
                   <h4 class="ticket__type">VIP</h4>
                 </span>
-                <span class="ticket__price">1950 ₴</span>
+                <span class="ticket__price">950 ₴</span>
               </div>
               <ul class="info">
                 <li class="info__item vip-pseudo">

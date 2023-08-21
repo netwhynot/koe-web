@@ -34,20 +34,22 @@ onUnmounted(() => {
       <NuxtLink to="/donate" class="button black">Задонатити</NuxtLink>
     </div>
     <div class="time-left-bg">
-      <div class="container time-left">
-        <p class="time-left__text">Кінець продажу:</p>
-        <ClientOnly>
-          <vue-countdown
-            v-slot="{ days, hours, minutes, seconds }"
-            class="time-left__text"
-            :time="
-              new Date(2023, 7, 25, 24, 0, 0).getTime() - new Date().getTime()
-            "
-          >
-            {{ days }} днів, {{ hours }} годин, {{ minutes }} хвилин,
-            {{ seconds }} секунд
-          </vue-countdown>
-        </ClientOnly>
+      <div class="container">
+        <div class="time-left">
+          <p class="time-left__text">Кінець продажу:</p>
+          <ClientOnly>
+            <vue-countdown
+              v-slot="{ days, hours, minutes, seconds }"
+              class="time-left__text"
+              :time="
+                new Date(2023, 7, 25, 24, 0, 0).getTime() - new Date().getTime()
+              "
+            >
+              {{ days }} днів, {{ hours }} годин, {{ minutes }} хвилин,
+              {{ seconds }} секунд
+            </vue-countdown>
+          </ClientOnly>
+        </div>
       </div>
     </div>
     <div class="container buttons-wrapper" :class="{ display: width < 480 }">
@@ -266,6 +268,10 @@ onUnmounted(() => {
   padding-top: 20px;
   padding-bottom: 20px;
 
+  @media screen and (min-width: $vp-desktop) {
+    padding: 20px 200px;
+  }
+
   &__text {
     display: inline;
     margin: 0;
@@ -360,7 +366,23 @@ onUnmounted(() => {
     &__item {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+    }
+  }
+
+  &__item {
+    @media screen and (min-width: $vp-mobile) {
+      justify-content: center;
+      gap: 16px;
+    }
+
+    @media screen and (min-width: $vp-tablet) {
+      justify-content: center;
+      gap: 32px;
+    }
+
+    @media screen and (min-width: $vp-desktop) {
+      justify-content: center;
+      gap: 52px;
     }
   }
 }
