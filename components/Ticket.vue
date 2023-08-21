@@ -1,31 +1,41 @@
 <script lang="ts" setup>
+import { ITicket } from "@/server/dbModels/ticket";
+import { IUser } from "@/server/dbModels/user";
+
 const props = defineProps({
-  ticketType: {
-    type: String, // Participant, Player, Staff, VIP
+  ticket: {
+    type: Object as () => ITicket,
     required: true,
   },
-  gift: {
-    type: Object,
+  isGifted: {
+    type: Boolean,
+    default: false,
+  },
+  isGift: {
+    type: Boolean,
+    default: false,
+  },
+  giftedBy: {
+    type: Object as () => IUser,
     default: () => ({}),
   },
 });
 
-const isVIP: Ref<boolean> = ref(props.ticketType === "VIP");
-const isGift: Ref<boolean> = ref(
-  // eslint-disable-next-line prettier/prettier
-  props.gift && Object.keys(props.gift).length !== 0
-);
+const isVIP: Ref<boolean> = ref(props.ticket.type === "VIP");
 
-const ticketTypes: { [key: string]: { html: string; color: string } } = {
+const ticketStyles: { [key: string]: { html: string; color: string } } = {
   Participant: { html: "Учасник", color: "#5662f6" },
   Player: { html: "Гравець", color: "#6441a4" },
-  Staff: { html: "Організатор", color: "#e00087" },
   VIP: { html: "VIP", color: "#d31717" },
 };
+
+onMounted(() => {
+  console.log(props);
+});
 </script>
 
 <template>
-  <div class="ticket">
+  <div v-if="!isGifted" class="ticket">
     <div class="ticket__inner">
       <img class="ticket__qr" src="@/assets/img/qr.jpg" alt="qr code" />
       <div class="ticket__headings" :class="{ margin: isVIP }">
@@ -35,19 +45,13 @@ const ticketTypes: { [key: string]: { html: string; color: string } } = {
       <div v-if="!isVIP" class="ticket__type">
         <span class="ticket__text">Тип квитка</span>
         <span class="ticket__text type__name">{{
-          ticketTypes[props.ticketType].html
+          ticketStyles[props.ticket.type].html
         }}</span>
       </div>
       <div v-if="isGift" class="ticket__gift">
-        <span class="ticket__text">{{
-          props.gift && props.gift.giftFrom ? "Подаровано від" : "Подаровано"
-        }}</span>
+        <span class="ticket__text">Подаровано від</span>
         <span class="ticket__text gift__name">{{
-          props.gift && props.gift.giftFrom
-            ? props.gift.giftFrom
-            : props.gift && props.gift.giftedTo
-            ? props.gift.giftedTo
-            : ""
+          props.isGift && props.giftedBy.username ? props.giftedBy.username : ""
         }}</span>
       </div>
     </div>
@@ -77,7 +81,7 @@ const ticketTypes: { [key: string]: { html: string; color: string } } = {
     border-style: solid;
     border-width: 0 0 56px 56px;
     border-color: transparent transparent
-      v-bind("ticketTypes[props.ticketType].color") transparent;
+      v-bind("ticketStyles[props.ticket.type].color") transparent;
 
     @media screen and (min-width: $vp-mobile) {
       border-width: 0 0 80px 80px;
@@ -143,7 +147,7 @@ const ticketTypes: { [key: string]: { html: string; color: string } } = {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background-color: v-bind("ticketTypes[props.ticketType].color");
+      background-color: v-bind("ticketStyles[props.ticket.type].color");
       transform: translateY(-50%);
     }
 
@@ -182,7 +186,7 @@ const ticketTypes: { [key: string]: { html: string; color: string } } = {
 }
 
 .type__name {
-  color: v-bind("ticketTypes[props.ticketType].color");
+  color: v-bind("ticketStyles[props.ticket.type].color");
   font-family: "Mulish";
   font-size: 16px;
   font-style: normal;

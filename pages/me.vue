@@ -1,22 +1,21 @@
 <script lang="ts" setup>
-import ky from "ky";
-// import { IUser } from "@/interfaces/user.interface";
-import { ticketSchema } from "server/dbModels/ticket";
-import
+import { IUser } from "@/server/dbModels/user";
+import { IInventoryTicket, IInventoryGift } from "@/server/dbModels/inventory";
 
 const tab: Ref<number> = ref(1);
 const modalIsActive: Ref<boolean> = ref(false);
-const tickets: Ref<(typeof ticketSchema)[]> = ref([]);
+
+const ownTickets: Ref<IInventoryTicket[]> = ref([]);
+const giftedTickets: Ref<IInventoryGift[]> = ref([]);
 
 onMounted(async () => {
+  const data = await $fetch<IUser>("/api/users/64e0d9b94933dd0fa10e3fe6");
 
-  const json:  = await $fetch("http://localhost:3000/api/users/64e0d9b94933dd0fa10e3fe6")
-
-  tickets.value = json.inventory.;
+  ownTickets.value = data.inventory.tickets;
+  giftedTickets.value = data.inventory.gifts;
 });
 
 //   { type: "Participant", price: 3213213, description: "" },
-//   { type: "Staff", price: 312321, description: "" },
 //   { type: "VIP", price: 33222, description: "" },
 </script>
 
@@ -101,9 +100,27 @@ onMounted(async () => {
         </div>
         <div v-if="tab === 2" class="content content__tickets">
           <!-- <Ticket v-for="ticket of tickets" :key="ticket.ticket" /> -->
-          <div v-if="tickets.length <= 0" class="no-tickets">
+          <div
+            v-if="ownTickets.length <= 0 && giftedTickets.length <= 0"
+            class="no-tickets"
+          >
             <p>Схоже, у Вас ще немає жодного квитка</p>
             <NuxtLink to="/buy">купити квиток</NuxtLink>
+          </div>
+          <div v-else>
+            <Ticket
+              v-for="ticket of ownTickets"
+              :key="new Date(ticket.createdAt).getTime()"
+              :ticket="ticket.ticket"
+              :ticket-type="ticket.ticket.type"
+            />
+            <Ticket
+              v-for="ticket of giftedTickets"
+              :key="new Date(ticket.giftedAt).getTime()"
+              :ticket="ticket.ticket"
+              :is-gift="true"
+              :ticket-type="ticket.ticket.type"
+            />
           </div>
         </div>
       </div>

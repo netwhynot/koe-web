@@ -1,9 +1,19 @@
-import mongoose from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
+import { IInventory } from "./inventory";
 
-export const userSchema = new mongoose.Schema({
+export interface IUser {
+  username: string;
+  osuId: number;
+  inventory: IInventory;
+  email?: string;
+  discordId?: string;
+  createdAt?: Date;
+}
+
+export const userSchema = new Schema<IUser>({
   username: String,
   osuId: { type: Number, unique: true },
-  inventory: { type: mongoose.Schema.Types.ObjectId, ref: "Inventory" },
+  inventory: { type: Types.ObjectId, ref: "Inventory" },
   email: { type: String, unique: true, required: false },
   discordId: { type: String, unique: true, required: false },
   createdAt: { type: Date, default: Date.now, required: false },

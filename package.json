@@ -30,6 +30,6 @@
   "dependencies": {
     "@chenfengyuan/vue-countdown": "2",
     "@pinia/nuxt": "^0.4.11",
-    "ky": "^0.33.3"
+    "superjson": "^1.13.1"
   }
 }

@@ -1,14 +1,25 @@
-import { user } from "../../dbModels";
+import { inventory, user } from "../../dbModels";
 
 export default defineEventHandler(async (event) => {
   const userId = event.context.params?.id;
 
   try {
-    const userData = await user
+    const userData = await user.findOne({
+      _id: userId,
+    });
+
+    const userInventory = await inventory
       .findOne({
-        _id: userId,
+        owner: userId,
       })
-      .populate("inventory");
+      .populate({
+        path: "tickets",
+        populate: {
+          path: "ticket",
+        },
+      });
+
+    userData!.inventory = userInventory!;
 
     if (userData) {
       return {
