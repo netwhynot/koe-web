@@ -50,6 +50,16 @@ body {
     max-width: 432px;
     padding: 0 24px;
   }
+
+  @media screen and (min-width: $vp-tablet) {
+    max-width: 712px;
+    padding: 0 24px;
+  }
+  
+  @media screen and (min-width: $vp-tlandscape) {
+    max-width: 875px;
+    padding: 0 24px;
+  }
 }
 
 a {

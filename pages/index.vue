@@ -20,9 +20,8 @@ onUnmounted(() => {
     <div class="container">
       <div class="hero">
         <h1 class="hero__heading">
-          <span>Kyiv</span><br />
-          osu <br />
-          event
+          <span>Kyiv</span>
+          osu event
         </h1>
         <div class="place">
           <h2 class="place__text">26.08.2023 / Signal Event Hall</h2>
@@ -138,6 +137,11 @@ onUnmounted(() => {
   z-index: 0;
   background: url("@/assets/svg/mobile-bg-shape1.svg") no-repeat center top;
   background-color: $dark;
+
+  @media screen and (min-width: calc($vp-mobile + 10px)) {
+    background: url("@/assets/svg/desktop-bg-shape1.svg") no-repeat center top;
+    background-color: $dark;
+  }
 }
 
 .hero {
@@ -148,7 +152,8 @@ onUnmounted(() => {
   }
 
   &__heading {
-    margin: 0;
+    max-width: 360px;
+    margin: 0 auto;
     color: $white;
     font-family: "Furore";
     font-size: 64px;
@@ -159,6 +164,13 @@ onUnmounted(() => {
     text-transform: uppercase;
 
     @media screen and (min-width: $vp-mobile) {
+      font-size: 96px;
+      letter-spacing: 9.6px;
+    }
+
+    @media screen and (min-width: $vp-tablet) {
+      max-width: 760px;
+      text-align: center;
       font-size: 96px;
       letter-spacing: 9.6px;
     }
@@ -176,6 +188,11 @@ onUnmounted(() => {
 
   @media screen and (min-width: $vp-mobile) {
     margin-top: 40px;
+  }
+
+  @media screen and (min-width: $vp-tablet) {
+    margin: 40px auto 0;
+    max-width: 440px;
   }
 
   &__text {
@@ -205,6 +222,7 @@ onUnmounted(() => {
 
   @media screen and (min-width: $vp-mobile) {
     flex-direction: row;
+    justify-content: center;
     gap: 12px;
     margin-bottom: 20px;
     margin-top: 0;
@@ -262,6 +280,10 @@ onUnmounted(() => {
     @media screen and (min-width: $vp-mobile) {
       font-size: 16px;
     }
+
+    @media screen and (min-width: $vp-tablet) {
+      font-size: 20px;
+    }
   }
 
   & > span {
@@ -269,6 +291,10 @@ onUnmounted(() => {
 
     @media screen and (min-width: $vp-mobile) {
       font-size: 20px;
+    }
+
+    @media screen and (min-width: $vp-tablet) {
+      font-size: 24px;
     }
   }
 
@@ -280,6 +306,14 @@ onUnmounted(() => {
 .info {
   padding: 56px 0;
 
+  @media screen and (min-width: $vp-mobile) {
+    padding: 100px 0;
+  }
+
+  @media screen and (min-width: $vp-tablet) {
+    padding: 150px 0;
+  }
+
   &__heading {
     color: $white;
     font-family: "Mulish";
@@ -287,6 +321,10 @@ onUnmounted(() => {
     font-style: normal;
     font-weight: 600;
     line-height: 130%; /* 23.4px */
+
+    @media screen and (min-width: $vp-tablet) {
+      font-size: 24px;
+    }
   }
 
   &__text {
@@ -299,6 +337,16 @@ onUnmounted(() => {
 
     @media screen and (min-width: $vp-mobile) {
       max-width: 340px;
+    }
+
+    @media screen and (min-width: $vp-tablet) {
+      max-width: 570px;
+      font-size: 20px;
+    }
+
+    @media screen and (min-width: $vp-tlandscape) {
+      max-width: 720px;
+      // font-size: 20px;
     }
   }
 }
