@@ -54,16 +54,12 @@ const handleOrder = async () => {
     };
   }
 
-  const response = await axios.post("/api/orders", postData, {
+  await axios.post("/api/orders", postData, {
     withCredentials: true,
     validateStatus: () => true,
   });
 
-  if (response.status !== 201) {
-    console.log("Kek");
-  } else {
-    console.log("Neger");
-  }
+  step.value = 3;
 };
 </script>
 
@@ -234,9 +230,9 @@ const handleOrder = async () => {
             :disabled="selectedTicket === 0"
             @click="step < 2 ? step++ : handleOrder()"
           >
-            <NuxtLink :to="step === 2 ? '/' : ''">
+            <a>
               {{ step === 1 ? "Оформити" : "Продовжити" }}
-            </NuxtLink>
+            </a>
           </button>
         </div>
       </div>
@@ -261,6 +257,7 @@ const handleOrder = async () => {
           <NuxtLink
             href="https://send.monobank.ua/jar/556LBrEDDs"
             class="content__link"
+            target="_blank"
             >Банка</NuxtLink
           >
         </div>

@@ -89,6 +89,7 @@ export default defineEventHandler(async (event) => {
         osuId: userData.osuId,
         username: userData.username,
         inventory: userData.inventory,
+        role: userData.role,
         email: userData.email,
         discordId: userData.discordId,
         createdAt: userData.createdAt,
