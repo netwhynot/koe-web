@@ -1,7 +1,7 @@
 import { randomBytes } from "crypto";
 import axios from "axios";
-import { IUserStore } from "@/interfaces/userStore.interface";
 import inventory from "@/server/dbModels/inventory";
+import user from "@/server/dbModels/user";
 
 const config = useRuntimeConfig();
 const storage = useStorage();
@@ -55,11 +55,13 @@ export default defineEventHandler(async (event) => {
 
   if (osuResponse.status !== 200) return;
 
-  let user = await $fetch<IUserStore["user"]>(
-    "/api/users/" + osuResponse.data.id,
+  const userRequest = await axios.get(
+    "http://localhost:3000/api/users/" + osuResponse.data.id,
   );
 
-  if (!user) {
+  let returnedUser = null;
+
+  if (userRequest.status === 404) {
     const newUserData = await user.create({
       osuId: osuResponse.data.id,
       username: osuResponse.data.username,
@@ -73,11 +75,13 @@ export default defineEventHandler(async (event) => {
     await newUserData.save();
     await newInventory.save();
 
-    user = newUserData;
+    returnedUser = newUserData;
+  } else {
+    returnedUser = userRequest.data;
   }
 
   const sessionToken = randomBytes(32).toString("hex");
-  await storage.setItem(sessionToken, user.id);
+  await storage.setItem(sessionToken, returnedUser.id);
 
   setCookie(event, "sessionToken", sessionToken, {
     maxAge: 60 * 60 * 24 * 7,
