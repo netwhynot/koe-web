@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 declare const InstallTrigger: any;
+const emit = defineEmits(["update:modelValue"]);
 
 const props = defineProps({
   inputType: {
@@ -22,6 +23,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  modelValue: {
+    type: String,
+    default: "",
+  },
 });
 
 const icon: Ref<HTMLSpanElement | null> = ref(null);
@@ -42,6 +47,9 @@ onMounted(() => {
       class="input"
       :type="props.inputType"
       :placeholder="props.inputPlaceholder"
+      @input="
+        emit('update:modelValue', ($event.target as HTMLInputElement).value)
+      "
     />
     <span ref="icon" class="icon"></span>
   </div>

@@ -12,8 +12,13 @@ const step: Ref<number> = ref(1);
 
 const selectedGift: Ref<number> = ref(0);
 const selectedTicket: Ref<number> = ref(0);
-
 const totalAmount: Ref<number> = ref(0);
+const name = ref("");
+const surname = ref("");
+const email = ref("");
+const birthDate = ref("");
+const toWho = ref("");
+
 
 definePageMeta({
   middleware: ["auth"],
@@ -196,26 +201,39 @@ const handleOrder = async () => {
       <Stepper v-if="step === 2">
         <div class="container">
           <form class="payment__form" @submit.prevent>
-            <PaymentInput :input-placeholder="'Ваше ім’я*'" input-type="text" />
             <PaymentInput
+              :model-value="name"
+              :input-placeholder="'Ваше ім’я*'"
+              input-type="text"
+              @update:model-value="(newValue) => (name = newValue)"
+            />
+            <PaymentInput
+              :model-value="surname"
               :input-placeholder="'Ваше прізвище*'"
               input-type="text"
+              @update:model-value="(newValue) => (surname = newValue)"
             />
             <PaymentInput
+              :model-value="email"
               :input-placeholder="'Електронна пошта*'"
               input-type="email"
+              @update:model-value="(newValue) => (email = newValue)"
             />
             <PaymentInput
+              :model-value="birthDate"
               :input-placeholder="'Дата народження*'"
               input-type="date"
               icon-path="url('_nuxt/assets/svg/calendar-icon.svg')"
               :firefox="true"
+              @update:model-value="(newValue) => (birthDate = newValue)"
             />
             <PaymentInput
               v-if="selectedTicket === 3"
+              :model-value="toWho"
               :input-placeholder="'Кому*'"
               input-type="text"
               icon-path="url('_nuxt/assets/svg/gift-icon-input.svg')"
+              @update:model-value="(newValue) => (toWho = newValue)"
             />
           </form>
         </div>
@@ -273,7 +291,7 @@ const handleOrder = async () => {
   background-color: $dark;
 
   @media screen and (min-width: $vp-mobile) {
-    padding: 76px 0 200px 0;
+    padding: 76px 0 300px 0;
     background: url("@/assets/svg/desktop-bg-shape1.svg") no-repeat top;
     background-color: $dark;
   }
