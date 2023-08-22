@@ -19,7 +19,7 @@ const isDrop: Ref<boolean> = ref(false);
               >
             </li>
             <li @mouseenter="isDrop = true" @mouseleave="isDrop = false">
-              <NuxtLink to="/about" class="header__inner-link">
+              <NuxtLink class="header__inner-link">
                 Інфомація
                 <span class="link-icon" :class="{ drop: isDrop }">
                   <svg
@@ -36,45 +36,43 @@ const isDrop: Ref<boolean> = ref(false);
                     />
                   </svg>
                 </span>
-                <ClientOnly>
-                  <ul class="dropdown" :class="{ 'dropdown-active': isDrop }">
-                    <li>
-                      <NuxtLink to="/about" class="header__inner-link"
-                        >Найчастіші запитання</NuxtLink
-                      >
-                    </li>
-                    <li>
-                      <NuxtLink to="/about" class="header__inner-link"
-                        >Місце проведення</NuxtLink
-                      >
-                    </li>
-                    <li>
-                      <NuxtLink to="/about" class="header__inner-link"
-                        >Подарувати квиток</NuxtLink
-                      >
-                    </li>
-                    <li>
-                      <NuxtLink to="/about" class="header__inner-link"
-                        >Підбір житла</NuxtLink
-                      >
-                    </li>
-                    <li>
-                      <NuxtLink to="/about" class="header__inner-link"
-                        >Задонатити</NuxtLink
-                      >
-                    </li>
-                    <li>
-                      <NuxtLink to="/about" class="header__inner-link"
-                        >Приєднатися до команди</NuxtLink
-                      >
-                    </li>
-                    <li>
-                      <NuxtLink to="/about" class="header__inner-link"
-                        >Купити необхідне</NuxtLink
-                      >
-                    </li>
-                  </ul>
-                </ClientOnly>
+                <ul class="dropdown" :class="{ 'dropdown-active': isDrop }">
+                  <li>
+                    <NuxtLink to="/about/faq" class="header__inner-link"
+                      >Найчастіші запитання</NuxtLink
+                    >
+                  </li>
+                  <li>
+                    <NuxtLink to="/about/place" class="header__inner-link"
+                      >Місце проведення</NuxtLink
+                    >
+                  </li>
+                  <li>
+                    <NuxtLink to="/about/gift" class="header__inner-link"
+                      >Подарувати квиток</NuxtLink
+                    >
+                  </li>
+                  <li>
+                    <NuxtLink to="/about/residence" class="header__inner-link"
+                      >Підбір житла</NuxtLink
+                    >
+                  </li>
+                  <li>
+                    <NuxtLink to="/donate" class="header__inner-link"
+                      >Задонатити</NuxtLink
+                    >
+                  </li>
+                  <li>
+                    <NuxtLink to="/about/join" class="header__inner-link"
+                      >Приєднатися до команди</NuxtLink
+                    >
+                  </li>
+                  <li>
+                    <NuxtLink to="/about/needings" class="header__inner-link"
+                      >Купити необхідне</NuxtLink
+                    >
+                  </li>
+                </ul>
               </NuxtLink>
             </li>
             <li>
@@ -93,9 +91,7 @@ const isDrop: Ref<boolean> = ref(false);
               >
             </li>
             <li>
-              <NuxtLink to="/me" class="header__inner-link"
-                >Мій профіль</NuxtLink
-              >
+              <NuxtLink to="/me" class="header__inner-link">Увійти</NuxtLink>
             </li>
           </ul>
         </div>
@@ -191,7 +187,7 @@ const isDrop: Ref<boolean> = ref(false);
   margin-left: 10px;
 
   & > svg {
-    transform: rotate(180deg) translateY(2px);
+    transform: rotate(0deg);
     transition: transform 0.2s ease;
   }
 }
@@ -210,7 +206,6 @@ const isDrop: Ref<boolean> = ref(false);
   // transition: all 0.3s ease;
 
   & > li {
-    padding: 12px 20px;
     background-color: $darkd;
 
     &:hover {
@@ -218,6 +213,8 @@ const isDrop: Ref<boolean> = ref(false);
     }
 
     & > a {
+      display: block;
+      padding: 12px 20px;
       &:hover {
         color: $white;
       }
@@ -227,7 +224,7 @@ const isDrop: Ref<boolean> = ref(false);
 
 .drop {
   & > svg {
-    transform: rotate(0deg);
+    transform: rotate(180deg);
   }
 }
 
