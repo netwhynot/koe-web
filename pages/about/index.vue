@@ -1,3 +1,12 @@
+<script lang="ts" setup>
+definePageMeta({
+  middleware: () => {
+    if (window.innerWidth > 680) {
+      return navigateTo("/about/place");
+    }
+  },
+});
+</script>
 <template>
   <div class="bg">
     <div class="about__content">

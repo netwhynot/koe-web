@@ -95,10 +95,22 @@ const openModal = () => {
         </li>
         <li class="menu__link">
           <NuxtLink
+            v-if="!userStore.isLoggedIn"
             active-class="active__route"
-            :to="userStore.isLoggedIn ? '/me' : ''"
-            @click="openModal"
+            @click="
+              () => {
+                openModal;
+                isActive = !isActive;
+              }
+            "
             >увійти</NuxtLink
+          >
+          <NuxtLink
+            v-else
+            to="/me"
+            active-class="active__route"
+            @click="isActive = !isActive"
+            >мій профіль</NuxtLink
           >
         </li>
       </ul>

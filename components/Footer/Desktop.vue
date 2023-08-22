@@ -12,7 +12,7 @@
       <NuxtLink to="/tourney">Про Турнір </NuxtLink>
     </li>
     <li class="menu-desktop__link">
-      <NuxtLink to="/me">Увійти</NuxtLink>
+      <NuxtLink to="/me">Мій Профіль</NuxtLink>
     </li>
     <li class="menu-desktop__link">
       <NuxtLink to="/buy">Купити квиток</NuxtLink>

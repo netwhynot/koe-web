@@ -3,6 +3,7 @@ import { IInventory } from "@/server/dbModels/inventory";
 
 export interface IUser {
   username: string;
+  role: "user" | "admin";
   osuId: number;
   inventory: IInventory | Types.ObjectId;
   email?: string;
@@ -12,6 +13,7 @@ export interface IUser {
 
 export const userSchema = new Schema<IUser>({
   username: String,
+  role: { type: String, default: "user" },
   osuId: { type: Number, unique: true },
   inventory: { type: Types.ObjectId, ref: "Inventory" },
   email: { type: String, required: false },

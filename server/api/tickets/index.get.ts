@@ -1,6 +1,30 @@
 import { ticket } from "@/server/dbModels";
 
+const storage = useStorage();
+
 export default defineEventHandler(async (event) => {
+  const cookie = getCookie(event, "sessionToken");
+
+  if (!cookie) {
+    event.node.res.statusCode = 401;
+
+    return {
+      code: "UNAUTHORIZED",
+      message: "You are not authorized to do this.",
+    };
+  } else {
+    const tokenUser = await storage.getItem(cookie);
+
+    if (!tokenUser) {
+      event.node.res.statusCode = 401;
+
+      return {
+        code: "UNAUTHORIZED",
+        message: "You are not authorized to do this.",
+      };
+    }
+  }
+
   try {
     const ticketData = await ticket.find({});
 
@@ -10,12 +34,13 @@ export default defineEventHandler(async (event) => {
       event.node.res.statusCode = 404;
 
       return {
-        code: "TICKET_NOT_FOUND",
+        code: "TICKETS_NOT_FOUND",
         message: "No tickets found.",
       };
     }
   } catch (err) {
     event.node.res.statusCode = 500;
+
     return {
       code: "ERROR",
       message: err,

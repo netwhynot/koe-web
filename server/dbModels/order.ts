@@ -3,14 +3,14 @@ import { IUser } from "@/server/dbModels/user";
 
 export interface IOrder {
   user: IUser | Types.ObjectId;
-  transactionId: string;
   createdAt: Date;
   status: "pending" | "completed" | "failed";
+  transactionId?: string;
 }
 
 export const userSchema = new Schema<IOrder>({
   user: { type: Types.ObjectId, ref: "User", required: true },
-  transactionId: { type: String, required: true },
+  transactionId: { type: String, required: false },
   createdAt: { type: Date, default: Date.now, required: true },
   status: { type: String, default: "pending" },
 });

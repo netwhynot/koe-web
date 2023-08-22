@@ -1,6 +1,7 @@
 import { randomBytes } from "crypto";
 import axios from "axios";
 import { IUserStore } from "@/interfaces/userStore.interface";
+import inventory from "@/server/dbModels/inventory";
 
 const config = useRuntimeConfig();
 const storage = useStorage();
@@ -59,13 +60,20 @@ export default defineEventHandler(async (event) => {
   );
 
   if (!user) {
-    user = await $fetch<IUserStore["user"]>("/api/users", {
-      method: "POST",
-      body: JSON.stringify({
-        osuId: osuResponse.data.id,
-        username: osuResponse.data.username,
-      }),
+    const newUserData = await user.create({
+      osuId: osuResponse.data.id,
+      username: osuResponse.data.username,
     });
+    const newInventory = await inventory.create({
+      owner: newUserData._id,
+    });
+
+    newUserData.inventory = newInventory._id;
+
+    await newUserData.save();
+    await newInventory.save();
+
+    user = newUserData;
   }
 
   const sessionToken = randomBytes(32).toString("hex");

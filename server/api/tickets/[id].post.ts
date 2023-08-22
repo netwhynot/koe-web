@@ -2,6 +2,8 @@ import * as QRCode from "qrcode";
 import mongoose from "mongoose";
 import { inventory, ticket } from "@/server/dbModels";
 
+const storage = useStorage();
+
 interface IRequestBody {
   orderId: string;
   forUser: mongoose.Types.ObjectId;
@@ -10,6 +12,28 @@ interface IRequestBody {
 }
 
 export default defineEventHandler(async (event) => {
+  const cookie = getCookie(event, "sessionToken");
+
+  if (!cookie) {
+    event.node.res.statusCode = 401;
+
+    return {
+      code: "UNAUTHORIZED",
+      message: "You are not authorized to do this.",
+    };
+  } else {
+    const tokenUser = await storage.getItem(cookie);
+
+    if (!tokenUser) {
+      event.node.res.statusCode = 401;
+
+      return {
+        code: "UNAUTHORIZED",
+        message: "You are not authorized to do this.",
+      };
+    }
+  }
+
   const ticketId = event.context.params?.id;
   const purchaseData: IRequestBody = await readBody(event);
 
