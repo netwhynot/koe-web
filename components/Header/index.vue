@@ -50,7 +50,7 @@ const isDrop: Ref<boolean> = ref(false);
                     </li>
                     <li>
                       <NuxtLink to="/about" class="header__inner-link"
-                        >Подаруваи квиток</NuxtLink
+                        >Подарувати квиток</NuxtLink
                       >
                     </li>
                     <li>

@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-countdown": "2",
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@pinia/nuxt": "^0.4.11",
     "superjson": "^1.13.1"
   }
