@@ -5,8 +5,6 @@ const modalIsActive = ref(false);
 const userStore = useUserStore();
 
 const openModal = () => {
-  isActive.value = !isActive.value;
-
   if (!userStore.isLoggedIn) {
     modalIsActive.value = !modalIsActive.value;
   }
@@ -99,7 +97,7 @@ const openModal = () => {
             active-class="active__route"
             @click="
               () => {
-                openModal;
+                openModal();
                 isActive = !isActive;
               }
             "
