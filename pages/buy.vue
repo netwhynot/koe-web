@@ -18,7 +18,7 @@ onUpdated(() => {});
     <div v-if="step !== 3" class="bg">
       <div :class="{ 'heading-wrapper': step === 2 }">
         <div class="container">
-          <h3 v-if="step === 1" class="heading">Оберіть тип квитка</h3>
+          <RichHeading v-if="step === 1">Оберіть тип квитка</RichHeading>
           <div v-if="step === 2" class="payment-wrapper">
             <p>Всього до оплати:</p>
             <span>1200 ₴</span>
@@ -91,9 +91,9 @@ onUpdated(() => {});
                   </li>
                 </ul>
               </div>
-              <h3 v-if="step === 1" class="heading remove">
-                Подарувати квиток
-              </h3>
+              <RichHeading v-if="step === 1" class="remove"
+                >Подарувати квиток</RichHeading
+              >
               <div
                 class="gift"
                 :class="
@@ -105,6 +105,7 @@ onUpdated(() => {});
                 "
                 @click="selectedTicket = Tickets.Gift"
               >
+                <span class="gift-note">Подарувати квиток</span>
                 <form class="form" @submit.prevent>
                   <label>
                     <input
@@ -303,6 +304,7 @@ onUpdated(() => {});
 
 .ticket {
   background-color: $white;
+  cursor: pointer;
 
   @media screen and (min-width: $vp-tlandscape) {
     max-width: 275px;
@@ -502,6 +504,8 @@ onUpdated(() => {});
 }
 
 .form {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -524,6 +528,7 @@ onUpdated(() => {});
     font-style: normal;
     font-weight: 500;
     line-height: 130%; /* 23.4px */
+    cursor: pointer;
   }
 }
 
@@ -540,6 +545,7 @@ onUpdated(() => {});
   height: 16px;
   border-radius: 50%;
   border: 2px solid $white;
+  cursor: pointer;
 
   &::after {
     content: "";
@@ -603,6 +609,11 @@ onUpdated(() => {});
     flex-direction: row;
   }
 
+  @media screen and (min-width: $vp-tablet) {
+    margin: 20px auto 0;
+    max-width: 432px;
+  }
+
   &__btn {
     max-width: 352px;
     width: 100%;
@@ -655,6 +666,11 @@ onUpdated(() => {});
   @media screen and (min-width: $vp-mobile) {
     margin-top: 76px;
     gap: 12px;
+  }
+
+  @media screen and (min-width: $vp-tablet) {
+    max-width: 432px;
+    margin: 76px auto 0;
   }
 }
 
@@ -732,6 +748,23 @@ onUpdated(() => {});
 
 .remove {
   @media screen and (min-width: $vp-tlandscape) {
+    display: none;
+  }
+}
+
+.gift-note {
+  position: absolute;
+  top: 45px;
+  color: $white;
+  text-align: center;
+  font-family: "Furore";
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 2.8px;
+
+  @media screen and (max-width: $vp-tlandscape) {
     display: none;
   }
 }
