@@ -55,7 +55,14 @@ const openModal = () => {
           <NuxtLink
             to="/buy"
             active-class="active__route"
-            @click="isActive = !isActive"
+            @click="
+              () => {
+                if (!userStore.isLoggedIn) {
+                  openModal();
+                }
+                isActive = !isActive;
+              }
+            "
             >купити квиток</NuxtLink
           >
         </li>
