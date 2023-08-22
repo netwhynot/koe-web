@@ -4,11 +4,10 @@ export interface IOsuUser {
   id: number;
   username: string;
   avatar_url: string;
-  country_code: string;
 }
 
 export interface IUserStore {
   isLoggedIn: boolean;
-  user: IUser;
+  user: IUser & { _id: string };
   osuUser: IOsuUser;
 }

@@ -1,7 +1,17 @@
 <script lang="ts" setup>
 import { IUser } from "@/server/dbModels/user";
-import { IInventoryTicket, IInventoryGift } from "@/server/dbModels/inventory";
+import {
+  IInventoryTicket,
+  IInventoryGift,
+  IInventory,
+} from "@/server/dbModels/inventory";
 import { ITicket } from "server/dbModels/ticket";
+import { useUserStore } from "@/stores/user";
+const userStore = useUserStore();
+
+definePageMeta({
+  middleware: ["auth"],
+});
 
 const tab: Ref<number> = ref(1);
 const modalIsActive: Ref<boolean> = ref(false);
@@ -10,10 +20,10 @@ const ownTickets: Ref<IInventoryTicket[]> = ref([]);
 const giftedTickets: Ref<IInventoryGift[]> = ref([]);
 
 onMounted(async () => {
-  const data = await $fetch<IUser>("/api/users/64e0d9b94933dd0fa10e3fe6");
+  const data = await $fetch<IUser>("/api/users/" + userStore.user._id);
 
-  ownTickets.value = data.inventory.tickets;
-  giftedTickets.value = data.inventory.gifts;
+  ownTickets.value = (<IInventory>data.inventory).tickets;
+  giftedTickets.value = (<IInventory>data.inventory).gifts;
 });
 </script>
 
@@ -40,8 +50,8 @@ onMounted(async () => {
       </Modal>
     </Transition>
     <div class="container account">
-      <div class="account__pic"></div>
-      <h2 class="account__name">alowave23</h2>
+      <img class="account__pic" :src="userStore.osuUser.avatar_url" />
+      <h2 class="account__name">{{ userStore.user.username }}</h2>
     </div>
     <div class="tabs-bg">
       <div class="container tabs__container">
@@ -111,6 +121,7 @@ onMounted(async () => {
             :key="new Date(ticket.createdAt).getTime()"
             :ticket="<ITicket>ticket.ticket"
             :ticket-type="(<ITicket>ticket.ticket).type"
+            :qr-code="ticket.qrCode!"
           />
           <Ticket
             v-for="ticket of giftedTickets"
@@ -118,6 +129,7 @@ onMounted(async () => {
             :ticket="<ITicket>ticket.ticket"
             :is-gift="true"
             :ticket-type="(<ITicket>ticket.ticket).type"
+            :qr-code="ticket.qrCode!"
           />
         </div>
       </div>
@@ -144,7 +156,7 @@ onMounted(async () => {
     display: inline-block;
     width: 72px;
     height: 72px;
-    background: url("../assets/svg/discord.svg") no-repeat center;
+    background: v-bind("userStore.osuUser.avatar_url") no-repeat center;
     background-size: contain;
 
     @include rounded-hex($rotated: true);

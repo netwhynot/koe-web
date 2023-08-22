@@ -1,11 +1,12 @@
 import mongoose, { Schema, Types } from "mongoose";
-import { IUser } from "./user";
-import { ITicket } from "./ticket";
+import { IUser } from "@/server/dbModels/user";
+import { ITicket } from "@/server/dbModels/ticket";
 
 export interface IInventoryTicket {
   ticket: ITicket | Types.ObjectId;
   isGifted: boolean;
   createdAt: Date;
+  qrCode?: string;
 }
 
 export interface IInventoryGift {
@@ -13,6 +14,7 @@ export interface IInventoryGift {
   to: IUser | Types.ObjectId;
   from: IUser | Types.ObjectId;
   giftedAt: Date;
+  qrCode?: string;
 }
 
 export interface IInventory {
@@ -28,6 +30,7 @@ export const inventorySchema = new Schema<IInventory>({
       ticket: { type: Types.ObjectId, ref: "Ticket" },
       isGifted: { type: Boolean, default: false },
       createdAt: { type: Date, default: Date.now },
+      qrCode: { type: String, required: false },
     },
   ],
   gifts: [
@@ -36,6 +39,7 @@ export const inventorySchema = new Schema<IInventory>({
       to: { type: Types.ObjectId, ref: "User", required: true },
       from: { type: Types.ObjectId, ref: "User", required: true },
       giftedAt: { type: Date, default: Date.now },
+      qrCode: { type: String, required: false },
     },
   ],
 });

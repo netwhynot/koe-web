@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 const width: Ref<number> = ref(320);
 
+definePageMeta({
+  middleware: ["from-callback"],
+});
+
 const changeWidth = () => {
   width.value = window.innerWidth;
 };
@@ -34,22 +38,18 @@ onUnmounted(() => {
       <NuxtLink to="/donate" class="button black">Задонатити</NuxtLink>
     </div>
     <div class="time-left-bg">
-      <div class="container">
-        <div class="time-left">
-          <p class="time-left__text">Кінець продажу:</p>
-          <ClientOnly>
-            <vue-countdown
-              v-slot="{ days, hours, minutes, seconds }"
-              class="time-left__text"
-              :time="
-                new Date(2023, 7, 25, 24, 0, 0).getTime() - new Date().getTime()
-              "
-            >
-              {{ days }} днів, {{ hours }} годин, {{ minutes }} хвилин,
-              {{ seconds }} секунд
-            </vue-countdown>
-          </ClientOnly>
-        </div>
+      <div class="container time-left">
+        <p class="time-left__text">Кінець продажу:</p>
+        <vue-countdown
+          v-slot="{ days, hours, minutes, seconds }"
+          class="time-left__text"
+          :time="
+            new Date(2023, 7, 25, 24, 0, 0).getTime() - new Date().getTime()
+          "
+        >
+          {{ days }} дні, {{ hours }} годин, {{ minutes }} хвилин,
+          {{ seconds }} секунд
+        </vue-countdown>
       </div>
     </div>
     <div class="container buttons-wrapper" :class="{ display: width < 480 }">

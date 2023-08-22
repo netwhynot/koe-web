@@ -1,10 +1,10 @@
 import mongoose, { Schema, Types } from "mongoose";
-import { IInventory } from "./inventory";
+import { IInventory } from "@/server/dbModels/inventory";
 
 export interface IUser {
   username: string;
   osuId: number;
-  inventory: IInventory;
+  inventory: IInventory | Types.ObjectId;
   email?: string;
   discordId?: string;
   createdAt?: Date;
@@ -14,8 +14,8 @@ export const userSchema = new Schema<IUser>({
   username: String,
   osuId: { type: Number, unique: true },
   inventory: { type: Types.ObjectId, ref: "Inventory" },
-  email: { type: String, unique: true, required: false },
-  discordId: { type: String, unique: true, required: false },
+  email: { type: String, required: false },
+  discordId: { type: String, required: false },
   createdAt: { type: Date, default: Date.now, required: false },
 });
 

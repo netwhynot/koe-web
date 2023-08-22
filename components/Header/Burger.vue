@@ -6,6 +6,7 @@ const userStore = useUserStore();
 
 const openModal = () => {
   isActive.value = !isActive.value;
+
   if (!userStore.isLoggedIn) {
     modalIsActive.value = !modalIsActive.value;
   }
@@ -25,8 +26,11 @@ const openModal = () => {
         <p class="modal__text">
           Для того щоб продовжити, Вам необхідно виконати вхід за допомогою OSU!
         </p>
-        <NuxtLink to="/" class="modal__btn" @click="modalIsActive = false"
-          >вхід</NuxtLink
+        <a
+          href="/api/auth/authorize"
+          class="modal__btn"
+          @click="modalIsActive = false"
+          >вхід</a
         >
       </Modal>
     </Transition>

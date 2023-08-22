@@ -2,21 +2,42 @@ import { IInventoryGift, IInventoryTicket } from "@/server/dbModels/inventory";
 import { inventory, user } from "@/server/dbModels";
 import ticket from "@/server/dbModels/ticket";
 
+const storage = useStorage();
+
 export default defineEventHandler(async (event) => {
-  const userId = event.context.params!.id;
+  const cookie = getCookie(event, "sessionToken");
+
+  if (!cookie) {
+    event.node.res.statusCode = 401;
+
+    return {
+      code: "UNAUTHORIZED",
+      message: "You are not authorized to do this. Cookie.",
+    };
+  }
+
+  const tokenUser = await storage.getItem(cookie);
+
+  if (!tokenUser) {
+    event.node.res.statusCode = 401;
+
+    return {
+      code: "UNAUTHORIZED",
+      message: "You are not authorized to do this. User.",
+    };
+  }
 
   try {
-    const userFilter =
-      userId.length === 24 ? { _id: userId } : { osuId: userId };
-
-    const userData = await user.findOne(userFilter);
+    const userData = await user.findOne({
+      _id: tokenUser,
+    });
 
     if (!userData) {
       event.node.res.statusCode = 404;
 
       return {
         code: "USER_NOT_FOUND",
-        message: `User with id ${userId} doesn't exists.`,
+        message: `User with id ${tokenUser} doesn't exists.`,
       };
     }
 
@@ -77,7 +98,7 @@ export default defineEventHandler(async (event) => {
 
       return {
         code: "USER_NOT_FOUND",
-        message: `User with id ${userId} doesn't exists.`,
+        message: `User with id ${tokenUser} doesn't exists.`,
       };
     }
   } catch (err) {
