@@ -4,7 +4,7 @@ import inventory from "@/server/dbModels/inventory";
 import user from "@/server/dbModels/user";
 
 const config = useRuntimeConfig();
-const storage = useStorage();
+const storage = useStorage("redis");
 
 export default defineEventHandler(async (event) => {
   const cookie = getCookie(event, "token");
@@ -84,7 +84,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const sessionToken = randomBytes(32).toString("hex");
-  await storage.setItem(sessionToken, returnedUser.id);
+  await storage.setItem("sessions:" + sessionToken, returnedUser.id);
 
   setCookie(event, "sessionToken", sessionToken, {
     maxAge: 60 * 60 * 24 * 7,

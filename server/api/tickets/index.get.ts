@@ -1,6 +1,6 @@
 import { ticket } from "@/server/dbModels";
 
-const storage = useStorage();
+const storage = useStorage("redis");
 
 export default defineEventHandler(async (event) => {
   const cookie = getCookie(event, "sessionToken");
@@ -10,17 +10,17 @@ export default defineEventHandler(async (event) => {
 
     return {
       code: "UNAUTHORIZED",
-      message: "You are not authorized to do this.",
+      message: "You are not authorized to do this. a",
     };
   } else {
-    const tokenUser = await storage.getItem(cookie);
+    const tokenUser = await storage.getItem("sessions:" + cookie);
 
     if (!tokenUser) {
       event.node.res.statusCode = 401;
 
       return {
         code: "UNAUTHORIZED",
-        message: "You are not authorized to do this.",
+        message: "You are not authorized to do this. b",
       };
     }
   }

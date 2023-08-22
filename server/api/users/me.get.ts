@@ -2,7 +2,7 @@ import { IInventoryGift, IInventoryTicket } from "@/server/dbModels/inventory";
 import { inventory, user } from "@/server/dbModels";
 import ticket from "@/server/dbModels/ticket";
 
-const storage = useStorage();
+const storage = useStorage("redis");
 
 export default defineEventHandler(async (event) => {
   const cookie = getCookie(event, "sessionToken");
@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
     };
   }
 
-  const tokenUser = await storage.getItem(cookie);
+  const tokenUser = await storage.getItem("sessions:" + cookie);
 
   if (!tokenUser) {
     event.node.res.statusCode = 401;
