@@ -100,6 +100,11 @@
 .bg {
   background: url("@/assets/svg/mobile-bg-shape1.svg") no-repeat top;
   background-color: $dark;
+
+  @media screen and (min-width: calc($vp-mobile + 10px)) {
+    background: url("@/assets/svg/desktop-bg-shape1.svg") no-repeat top;
+    background-color: $dark;
+  }
 }
 
 .faq-content {
