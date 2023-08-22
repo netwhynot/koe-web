@@ -4,6 +4,10 @@ const selectedGift: Ref<number> = ref(0);
 const selectedTicket: Ref<number> = ref(0);
 // const isValid: Ref<boolean> = ref(false);
 
+definePageMeta({
+  middleware: ["auth"],
+});
+
 enum Tickets {
   Basic = 1,
   VIP = 2,

@@ -29,7 +29,12 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-countdown": "2",
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
     "@pinia/nuxt": "^0.4.11",
+    "@types/axios": "^0.14.0",
+    "@types/qrcode": "^1.5.1",
+    "axios": "^1.4.0",
+    "qrcode": "^1.5.3",
     "superjson": "^1.13.1"
   }
 }

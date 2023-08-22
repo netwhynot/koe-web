@@ -3,6 +3,7 @@ import { fileURLToPath, URL } from "node:url";
 
 export default defineNuxtConfig({
   // devtools: { enabled: true },
+  ssr: false,
   runtimeConfig: {
     mongoose: {
       url: process.env.MONGO_URL,

@@ -1,4 +1,4 @@
-import { inventory, user } from "../../dbModels";
+import { inventory, user } from "@/server/dbModels";
 
 interface IRequestBody {
   osuId: number;
@@ -13,7 +13,8 @@ export default defineEventHandler(async (event) => {
   });
 
   if (userDatabase) {
-    event.res.statusCode = 409;
+    event.node.res.statusCode = 409;
+
     return {
       code: "USER_EXISTS",
       message: "User with given osuId already exists.",
@@ -29,9 +30,8 @@ export default defineEventHandler(async (event) => {
     await newUserData.save();
     await newInventory.save();
 
-    return {
-      id: newUserData._id,
-      osuId: newUserData.osuId,
-    };
+    event.node.res.statusCode = 201;
+
+    return newUserData;
   }
 });

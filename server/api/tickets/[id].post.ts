@@ -1,7 +1,9 @@
+import * as QRCode from "qrcode";
 import mongoose from "mongoose";
 import { inventory, ticket } from "@/server/dbModels";
 
 interface IRequestBody {
+  orderId: string;
   forUser: mongoose.Types.ObjectId;
   isGift: boolean;
   fromUser?: mongoose.Types.ObjectId;
@@ -26,6 +28,14 @@ export default defineEventHandler(async (event) => {
         message: "User with given id doesn't exists.",
       };
 
+    const qrCode = await QRCode.toBuffer(purchaseData.orderId, {
+      margin: 1,
+      width: 200,
+      color: {
+        light: "#00000000",
+      },
+    });
+
     if (purchaseData.isGift && purchaseData.fromUser) {
       const fromInventory = await inventory.findOne({
         owner: purchaseData.fromUser,
@@ -37,6 +47,7 @@ export default defineEventHandler(async (event) => {
           to: purchaseData.forUser,
           from: purchaseData.fromUser,
           giftedAt: new Date(),
+          qrCode: qrCode.toString("base64"),
         });
         fromInventory.tickets.push({
           ticket: ticketData,
@@ -52,6 +63,7 @@ export default defineEventHandler(async (event) => {
         ticket: ticketData._id,
         isGifted: false,
         createdAt: new Date(),
+        qrCode: qrCode.toString("base64"),
       });
 
       await forInventory.save();

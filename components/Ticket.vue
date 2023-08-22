@@ -19,6 +19,10 @@ const props = defineProps({
     type: Object as () => IUser,
     default: () => ({}),
   },
+  qrCode: {
+    type: String,
+    required: true,
+  },
 });
 
 const isVIP: Ref<boolean> = ref(props.ticket.type === "VIP");
@@ -33,7 +37,11 @@ const ticketStyles: { [key: string]: { html: string; color: string } } = {
 <template>
   <div v-if="!isGifted" class="ticket">
     <div class="ticket__inner">
-      <img class="ticket__qr" src="@/assets/img/qr.jpg" alt="qr code" />
+      <img
+        class="ticket__qr"
+        :src="'data:image/png;base64, ' + qrCode"
+        alt="qr code"
+      />
       <div class="ticket__headings" :class="{ margin: isVIP }">
         <h3 v-if="isVIP" class="ticket__heading vip">VIP</h3>
         <h4 class="ticket__heading">Kyiv osu event</h4>
