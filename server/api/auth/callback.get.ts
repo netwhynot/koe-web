@@ -57,6 +57,9 @@ export default defineEventHandler(async (event) => {
 
   const userRequest = await axios.get(
     "http://localhost:3000/api/users/" + osuResponse.data.id,
+    {
+      validateStatus: () => true,
+    },
   );
 
   let returnedUser = null;
