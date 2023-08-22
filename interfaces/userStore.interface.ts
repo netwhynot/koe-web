@@ -8,6 +8,6 @@ export interface IOsuUser {
 
 export interface IUserStore {
   isLoggedIn: boolean;
-  user: IUser & { _id: string };
+  user: IUser & { id: string };
   osuUser: IOsuUser;
 }

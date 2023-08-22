@@ -1,7 +1,7 @@
 const config = useRuntimeConfig();
 
 export default defineEventHandler(async (event) => {
-  const cookie = getCookie(event, "token");
+  const cookie = getCookie(event, "sessionToken");
 
   if (cookie) return sendRedirect(event, "/", 302);
 

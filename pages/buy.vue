@@ -1,23 +1,71 @@
 <script lang="ts" setup>
-const step: Ref<number> = ref(1);
-const selectedGift: Ref<number> = ref(0);
-const selectedTicket: Ref<number> = ref(0);
-// const isValid: Ref<boolean> = ref(false);
-const name = ref("");
-const surname = ref("");
-const email = ref("");
-const birthDate = ref("");
-const toWho = ref("");
-
-definePageMeta({
-  middleware: ["auth"],
-});
+import axios from "axios";
+import { useUserStore } from "@/stores/user";
 
 enum Tickets {
   Basic = 1,
   VIP = 2,
   Gift = 3,
 }
+
+const step: Ref<number> = ref(1);
+
+const selectedGift: Ref<number> = ref(0);
+const selectedTicket: Ref<number> = ref(0);
+const totalAmount: Ref<number> = ref(0);
+const name = ref("");
+const surname = ref("");
+const email = ref("");
+const birthDate = ref("");
+const toWho = ref("");
+
+
+definePageMeta({
+  middleware: ["auth"],
+});
+
+const userStore = useUserStore();
+const ticketsList = ["64e0dcb89886a103eac39528", "64e0dcfb9886a103eac39529"];
+
+watch(selectedGift, () => {
+  if (selectedGift.value === 1) {
+    totalAmount.value = 750;
+  } else if (selectedGift.value === 2) {
+    totalAmount.value = 950;
+  } else {
+    totalAmount.value = 0;
+  }
+});
+
+const handleOrder = async () => {
+  let postData = {};
+
+  if (selectedTicket.value === Tickets.Gift) {
+    postData = {
+      boughtTicket: {
+        ticket: ticketsList[selectedGift.value - 1],
+        to: "64e0dcb89886a103eac39528",
+        from: userStore.user.id,
+        isGifted: true,
+      },
+    };
+  } else {
+    postData = {
+      boughtTicket: {
+        ticket: ticketsList[selectedTicket.value - 1],
+        to: userStore.user.id,
+        isGifted: false,
+      },
+    };
+  }
+
+  await axios.post("/api/orders", postData, {
+    withCredentials: true,
+    validateStatus: () => true,
+  });
+
+  step.value = 3;
+};
 </script>
 
 <template>
@@ -28,7 +76,7 @@ enum Tickets {
           <RichHeading v-if="step === 1">Оберіть тип квитка</RichHeading>
           <div v-if="step === 2" class="payment-wrapper">
             <p>Всього до оплати:</p>
-            <span>1200 ₴</span>
+            <span>{{ totalAmount }} ₴</span>
           </div>
         </div>
       </div>
@@ -45,7 +93,10 @@ enum Tickets {
                     ? 'overlay'
                     : ''
                 "
-                @click="selectedTicket = Tickets.Basic"
+                @click="
+                  selectedTicket = Tickets.Basic;
+                  totalAmount = 750;
+                "
               >
                 <div class="ticket__header basic-bg">
                   <span class="ticket__type-wrapper basic">
@@ -74,7 +125,10 @@ enum Tickets {
                     ? 'overlay'
                     : ''
                 "
-                @click="selectedTicket = Tickets.VIP"
+                @click="
+                  selectedTicket = Tickets.VIP;
+                  totalAmount = 950;
+                "
               >
                 <div class="ticket__header vip-bg">
                   <span class="ticket__type-wrapper vip">
@@ -192,11 +246,11 @@ enum Tickets {
           <button
             class="controls__btn forward"
             :disabled="selectedTicket === 0"
-            @click="step++"
+            @click="step < 2 ? step++ : handleOrder()"
           >
-            <NuxtLink :to="step === 2 ? '/' : ''">
+            <a>
               {{ step === 1 ? "Оформити" : "Продовжити" }}
-            </NuxtLink>
+            </a>
           </button>
         </div>
       </div>
@@ -214,11 +268,16 @@ enum Tickets {
           />
           <p class="content__text">
             {{
-              `Ви успішно створили замовлення. Для оплати перекажіть amount грн.
+              `Ви успішно створили замовлення. Для оплати перекажіть ${totalAmount} грн.
           на банку за посиланням нижче і очікуйте білет у вашому профілі.`
             }}
           </p>
-          <NuxtLink class="content__link">Банка</NuxtLink>
+          <NuxtLink
+            href="https://send.monobank.ua/jar/556LBrEDDs"
+            class="content__link"
+            target="_blank"
+            >Банка</NuxtLink
+          >
         </div>
       </div>
     </div>

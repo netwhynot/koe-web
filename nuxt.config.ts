@@ -18,6 +18,16 @@ export default defineNuxtConfig({
     preset: "node-server",
     compressPublicAssets: true,
     plugins: ["~/server/index.ts"],
+    storage: {
+      redis: {
+        driver: "redis",
+        port: 6379,
+        host: "127.0.0.1",
+        username: "default",
+        password: "",
+        db: 1,
+      },
+    },
   },
   modules: ["@pinia/nuxt", "@pinia-plugin-persistedstate/nuxt"],
   app: {

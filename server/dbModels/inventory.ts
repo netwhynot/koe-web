@@ -6,6 +6,7 @@ export interface IInventoryTicket {
   ticket: ITicket | Types.ObjectId;
   isGifted: boolean;
   createdAt: Date;
+  isActive?: boolean;
   qrCode?: string;
 }
 
@@ -13,6 +14,7 @@ export interface IInventoryGift {
   ticket: ITicket | Types.ObjectId;
   to: IUser | Types.ObjectId;
   from: IUser | Types.ObjectId;
+  isActive?: boolean;
   giftedAt: Date;
   qrCode?: string;
 }
@@ -30,6 +32,7 @@ export const inventorySchema = new Schema<IInventory>({
       ticket: { type: Types.ObjectId, ref: "Ticket" },
       isGifted: { type: Boolean, default: false },
       createdAt: { type: Date, default: Date.now },
+      isActive: { type: Boolean, default: false },
       qrCode: { type: String, required: false },
     },
   ],
@@ -39,6 +42,7 @@ export const inventorySchema = new Schema<IInventory>({
       to: { type: Types.ObjectId, ref: "User", required: true },
       from: { type: Types.ObjectId, ref: "User", required: true },
       giftedAt: { type: Date, default: Date.now },
+      isActive: { type: Boolean, default: false },
       qrCode: { type: String, required: false },
     },
   ],

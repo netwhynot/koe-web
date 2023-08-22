@@ -20,10 +20,14 @@ const ownTickets: Ref<IInventoryTicket[]> = ref([]);
 const giftedTickets: Ref<IInventoryGift[]> = ref([]);
 
 onMounted(async () => {
-  const data = await $fetch<IUser>("/api/users/" + userStore.user._id);
+  const data = await $fetch<IUser>("/api/users/" + userStore.user.id);
 
-  ownTickets.value = (<IInventory>data.inventory).tickets;
-  giftedTickets.value = (<IInventory>data.inventory).gifts;
+  ownTickets.value = (<IInventory>data.inventory).tickets.filter(
+    (ticket) => ticket.isActive
+  );
+  giftedTickets.value = (<IInventory>data.inventory).gifts.filter(
+    (gift) => gift.isActive
+  );
 });
 </script>
 
