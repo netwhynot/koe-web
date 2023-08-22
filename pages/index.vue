@@ -268,6 +268,10 @@ onUnmounted(() => {
   padding-top: 20px;
   padding-bottom: 20px;
 
+  @media screen and (min-width: $vp-desktop) {
+    padding: 20px 200px;
+  }
+
   &__text {
     display: inline;
     margin: 0;
@@ -362,7 +366,23 @@ onUnmounted(() => {
     &__item {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+    }
+  }
+
+  &__item {
+    @media screen and (min-width: $vp-mobile) {
+      justify-content: center;
+      gap: 16px;
+    }
+
+    @media screen and (min-width: $vp-tablet) {
+      justify-content: center;
+      gap: 32px;
+    }
+
+    @media screen and (min-width: $vp-desktop) {
+      justify-content: center;
+      gap: 52px;
     }
   }
 }

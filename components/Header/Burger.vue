@@ -46,37 +46,58 @@ const openModal = () => {
     <div class="burger__menu" :class="isActive ? 'show-menu' : ''">
       <ul class="menu">
         <li class="menu__link">
-          <NuxtLink to="/" :class="isActive ? 'active__route' : ''"
+          <NuxtLink
+            to="/"
+            active-class="active__route"
+            @click="isActive = !isActive"
             >головна</NuxtLink
           >
         </li>
         <li class="menu__link">
-          <NuxtLink to="/buy" @click="isActive = !isActive"
+          <NuxtLink
+            to="/buy"
+            active-class="active__route"
+            @click="isActive = !isActive"
             >купити квиток</NuxtLink
           >
         </li>
         <li class="menu__link">
-          <NuxtLink to="/about" @click="isActive = !isActive"
+          <NuxtLink
+            to="/about"
+            active-class="active__route"
+            @click="isActive = !isActive"
             >інформація</NuxtLink
           >
         </li>
         <li class="menu__link">
-          <NuxtLink to="/torney" @click="isActive = !isActive"
+          <NuxtLink
+            to="/torney"
+            active-class="active__route"
+            @click="isActive = !isActive"
             >про турнір</NuxtLink
           >
         </li>
         <li class="menu__link">
-          <NuxtLink to="/donate" @click="isActive = !isActive"
+          <NuxtLink
+            to="/donate"
+            active-class="active__route"
+            @click="isActive = !isActive"
             >задонатити</NuxtLink
           >
         </li>
         <li class="menu__link">
-          <NuxtLink to="/staff" @click="isActive = !isActive"
+          <NuxtLink
+            to="/staff"
+            active-class="active__route"
+            @click="isActive = !isActive"
             >організатори</NuxtLink
           >
         </li>
         <li class="menu__link">
-          <NuxtLink :to="userStore.isLoggedIn ? '/me' : ''" @click="openModal"
+          <NuxtLink
+            active-class="active__route"
+            :to="userStore.isLoggedIn ? '/me' : ''"
+            @click="openModal"
             >увійти</NuxtLink
           >
         </li>
@@ -92,6 +113,10 @@ const openModal = () => {
   width: 30px;
   height: 30px;
   margin-left: 20px;
+
+  @media screen and (min-width: $vp-tlandscape) {
+    display: none;
+  }
 
   &__inner {
     position: absolute;

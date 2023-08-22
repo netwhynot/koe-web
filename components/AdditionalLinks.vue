@@ -47,9 +47,21 @@ onUpdated(() => {
   flex-direction: v-bind("style.flexDirection");
   gap: v-bind("style.gap");
 
-  & > a > img {
-    width: 44px;
+  @media screen and (min-width: $vp-tablet) {
+    margin-bottom: 20px;
+  }
+
+  @media screen and (min-width: $vp-tlandscape) {
+    justify-content: flex-end;
+  }
+
+  & > a {
     height: 44px;
+
+    & > img {
+      width: 44px;
+      height: 44px;
+    }
   }
 }
 </style>
