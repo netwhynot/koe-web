@@ -63,7 +63,11 @@ onUnmounted(() => {
             <NuxtLink to="/tourney">Про Турнір</NuxtLink>
           </li>
           <li class="menu__link">
-            <NuxtLink to="/buy">Купити квиток</NuxtLink>
+            <NuxtLink
+              to="/buy"
+              @click="!userStore.isLoggedIn ? openModal() : ''"
+              >Купити квиток</NuxtLink
+            >
           </li>
           <li class="menu__link">
             <NuxtLink to="/staff">Організатори</NuxtLink>

@@ -41,7 +41,10 @@ const openModal = () => {
         <div class="header__inner-links-wrapper">
           <ul class="header__inner-links">
             <li class="header__inner-link">
-              <NuxtLink to="/buy" class="header__inner-link"
+              <NuxtLink
+                to="/buy"
+                class="header__inner-link"
+                @click="!userStore.isLoggedIn ? openModal() : ''"
                 >Купити квиток</NuxtLink
               >
             </li>
