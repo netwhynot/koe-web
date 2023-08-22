@@ -6,22 +6,19 @@
       <NuxtLink to="/">Головна</NuxtLink>
     </li>
     <li class="menu-desktop__link">
-      <NuxtLink to="/tourney">Задонатити</NuxtLink>
+      <NuxtLink to="/donate">Задонатити</NuxtLink>
     </li>
     <li class="menu-desktop__link">
-      <NuxtLink to="/buy">Про Турнір </NuxtLink>
+      <NuxtLink to="/tourney">Про Турнір </NuxtLink>
     </li>
     <li class="menu-desktop__link">
-      <NuxtLink to="/staff">Мій профіль</NuxtLink>
+      <NuxtLink to="/me">Увійти</NuxtLink>
     </li>
     <li class="menu-desktop__link">
-      <NuxtLink to="/donate">Купити квиток</NuxtLink>
+      <NuxtLink to="/buy">Купити квиток</NuxtLink>
     </li>
     <li class="menu-desktop__link">
-      <NuxtLink to="/me">Інформація</NuxtLink>
-    </li>
-    <li class="menu-desktop__link">
-      <NuxtLink to="/about">Організатори</NuxtLink>
+      <NuxtLink to="/staff">Організатори</NuxtLink>
     </li>
   </ul>
 </template>

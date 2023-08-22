@@ -9,8 +9,6 @@ enum Tickets {
   VIP = 2,
   Gift = 3,
 }
-
-onUpdated(() => {});
 </script>
 
 <template>
