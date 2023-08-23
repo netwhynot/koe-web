@@ -1,8 +1,21 @@
 <script lang="ts" setup>
-// import ky from "ky";
-// import { IUser } from "@/interfaces/user.interface";
 import { ITickets } from "@/interfaces/inventory.interface";
+import { IUser } from "@/server/dbModels/user";
+import {
+  IInventoryTicket,
+  IInventoryGift,
+  IInventory,
+} from "@/server/dbModels/inventory";
+import { ITicket } from "server/dbModels/ticket";
+import { useUserStore } from "@/stores/user";
+const userStore = useUserStore();
 
+definePageMeta({
+  middleware: ["auth"],
+});
+
+>>>>>>> 9941f0c... wer
+>>>>>>> e02ee6c22758e83d73cec07781a33a90e9930fc3
 const tab: Ref<number> = ref(1);
 const modalIsActive: Ref<boolean> = ref(false);
 const tickets: Ref<ITickets[]> = ref([]);
