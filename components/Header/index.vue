@@ -78,7 +78,7 @@ const openModal = () => {
                     >
                   </li>
                   <li>
-                    <NuxtLink to="/about/gift" class="header__inner-link"
+                    <NuxtLink to="/buy" class="header__inner-link"
                       >Подарувати квиток</NuxtLink
                     >
                   </li>
@@ -98,7 +98,10 @@ const openModal = () => {
                     >
                   </li>
                   <li>
-                    <NuxtLink to="/about/needings" class="header__inner-link"
+                    <NuxtLink
+                      target="_blank"
+                      to="https://docs.google.com/spreadsheets/d/1EzmJlbQK_scRQNI_sOgXHoUgeFQtmofckr9P_Y2vz18/edit#gid=0"
+                      class="header__inner-link"
                       >Купити необхідне</NuxtLink
                     >
                   </li>
@@ -148,6 +151,7 @@ const openModal = () => {
 }
 
 .header-container {
+  padding: 0;
   @media screen and (min-width: $vp-mobile) {
     max-width: unset;
   }

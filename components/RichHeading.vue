@@ -1,6 +1,15 @@
+<script lang="ts" setup>
+const props = defineProps({
+  twoSide: {
+    type: Boolean,
+    default: false,
+  },
+});
+</script>
+
 <template>
   <div class="heading-align">
-    <h3 class="heading">
+    <h3 class="heading" :class="{ 'two-side': props.twoSide }">
       <slot></slot>
     </h3>
   </div>
@@ -33,6 +42,8 @@
   }
 
   @media screen and (min-width: $vp-tlandscape) {
+    margin: 0;
+
     &::after {
       content: "";
       position: absolute;
@@ -55,6 +66,24 @@
     position: absolute;
     top: 50%;
     right: calc(100% + 12px);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: $main;
+    transform: translateY(-50%);
+
+    @media screen and (min-width: $vp-mobile) {
+      top: 50%;
+    }
+  }
+}
+
+.two-side {
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 12px);
     width: 8px;
     height: 8px;
     border-radius: 50%;
