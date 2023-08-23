@@ -10,7 +10,74 @@ enum Tickets {
   Gift = 3,
 }
 
-onUpdated(() => {});
+const step: Ref<number> = ref(1);
+
+const selectedGift: Ref<number> = ref(0);
+const selectedTicket: Ref<number> = ref(0);
+const totalAmount: Ref<number> = ref(0);
+const name = ref("");
+const surname = ref("");
+const email = ref("");
+const birthDate = ref("");
+const toWho = ref("");
+
+definePageMeta({
+  middleware: ["auth"],
+});
+
+const userStore = useUserStore();
+const ticketsList = ["64e0dcb89886a103eac39528", "64e0dcfb9886a103eac39529"];
+
+watch(selectedGift, () => {
+  if (selectedGift.value === 1) {
+    totalAmount.value = 750;
+  } else if (selectedGift.value === 2) {
+    totalAmount.value = 950;
+  } else {
+    totalAmount.value = 0;
+  }
+});
+
+const handleOrder = async () => {
+  let postData = {};
+
+  if (selectedTicket.value === Tickets.Gift) {
+    const toWhoUser = await axios.get(`/api/users/${toWho.value}`, {
+      withCredentials: true,
+      validateStatus: () => true,
+    });
+
+    if (toWhoUser.status !== 200) {
+      return alert(
+        "Користувача з таким іменем не існує! Перевірте чи користувач, якому ви хочете подарувати білет, зареєстрований на нашому сайті.",
+      );
+    }
+
+    postData = {
+      boughtTicket: {
+        ticket: ticketsList[selectedGift.value - 1],
+        to: toWhoUser.data.id,
+        from: userStore.user.id,
+        isGifted: true,
+      },
+    };
+  } else {
+    postData = {
+      boughtTicket: {
+        ticket: ticketsList[selectedTicket.value - 1],
+        to: userStore.user.id,
+        isGifted: false,
+      },
+    };
+  }
+
+  await axios.post("/api/orders", postData, {
+    withCredentials: true,
+    validateStatus: () => true,
+  });
+
+  step.value = 3;
+};
 </script>
 
 <template>

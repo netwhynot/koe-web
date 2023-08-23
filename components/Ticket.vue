@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+import axios from "axios";
+import { ITicket } from "@/server/dbModels/ticket";
+
 const props = defineProps({
   ticketType: {
     type: String, // Participant, Player, Staff, VIP
@@ -7,6 +10,17 @@ const props = defineProps({
   gift: {
     type: Object,
     default: () => ({}),
+  isGifted: {
+    type: Boolean,
+    default: false,
+  },
+  isGift: {
+    type: Boolean,
+    default: false,
+  },
+  giftedBy: {
+    type: String,
+    default: undefined,
   },
 });
 
@@ -15,6 +29,15 @@ const isGift: Ref<boolean> = ref(
   // eslint-disable-next-line comma-dangle, prettier/prettier
   props.gift && Object.keys(props.gift).length !== 0
 );
+  qrCode: {
+    type: String,
+    required: true,
+  },
+});
+
+let giftedByUser: string | undefined;
+
+const isVIP: Ref<boolean> = ref(props.ticket.type === "VIP");
 
 const ticketTypes: { [key: string]: { html: string; color: string } } = {
   Participant: { html: "Учасник", color: "#5662f6" },
@@ -22,6 +45,12 @@ const ticketTypes: { [key: string]: { html: string; color: string } } = {
   Staff: { html: "Організатор", color: "#e00087" },
   VIP: { html: "VIP", color: "#d31717" },
 };
+
+if (props.isGift) {
+  const giftedByResponse = await axios.get(`/api/users/${props.giftedBy}`);
+
+  giftedByUser = giftedByResponse.data.username;
+}
 </script>
 
 <template>
@@ -42,12 +71,14 @@ const ticketTypes: { [key: string]: { html: string; color: string } } = {
         <span class="ticket__text">{{
           props.gift && props.gift.giftFrom ? "Подаровано від" : "Подаровано"
         }}</span>
+        <span class="ticket__text">Подаровано від:</span>
         <span class="ticket__text gift__name">{{
           props.gift && props.gift.giftFrom
             ? props.gift.giftFrom
             : props.gift && props.gift.giftedTo
             ? props.gift.giftedTo
             : ""
+          props.isGift ? giftedByUser : ""
         }}</span>
       </div>
     </div>
