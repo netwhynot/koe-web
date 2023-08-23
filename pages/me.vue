@@ -1,4 +1,21 @@
 <script lang="ts" setup>
+<<<<<<< HEAD
+=======
+import { IUser } from "@/server/dbModels/user";
+import {
+  IInventoryTicket,
+  IInventoryGift,
+  IInventory,
+} from "@/server/dbModels/inventory";
+import { ITicket } from "server/dbModels/ticket";
+import { useUserStore } from "@/stores/user";
+const userStore = useUserStore();
+
+definePageMeta({
+  middleware: ["auth"],
+});
+
+>>>>>>> 9941f0c... wer
 const tab: Ref<number> = ref(1);
 
 const tickets = [
