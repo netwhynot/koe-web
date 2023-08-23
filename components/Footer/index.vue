@@ -121,10 +121,7 @@ onUnmounted(() => {
     }
 
     @media screen and (min-width: $vp-tlandscape) {
-      max-width: 875px;
-    }
-
-    @media screen and (min-width: $vp-tlandscape) {
+      padding: 0 24px;
       max-width: 1160px;
     }
   }

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 definePageMeta({
   middleware: () => {
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 1024) {
       return navigateTo("/about/place");
     }
   },
@@ -49,8 +49,12 @@ definePageMeta({
           </div>
           <div class="about__help-item">
             <p>Також, Ви можете купити необхідне для KOE</p>
-            <!-- TODO: where to -->
-            <NuxtLink to="" class="wallet">Детальніше</NuxtLink>
+            <NuxtLink
+              target="_blank"
+              to="https://docs.google.com/spreadsheets/d/1EzmJlbQK_scRQNI_sOgXHoUgeFQtmofckr9P_Y2vz18/edit#gid=0"
+              class="wallet"
+              >Детальніше</NuxtLink
+            >
           </div>
         </div>
       </div>
