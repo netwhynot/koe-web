@@ -19,7 +19,6 @@ const email = ref("");
 const birthDate = ref("");
 const toWho = ref("");
 
-
 definePageMeta({
   middleware: ["auth"],
 });
@@ -41,10 +40,21 @@ const handleOrder = async () => {
   let postData = {};
 
   if (selectedTicket.value === Tickets.Gift) {
+    const toWhoUser = await axios.get(`/api/users/${toWho.value}`, {
+      withCredentials: true,
+      validateStatus: () => true,
+    });
+
+    if (toWhoUser.status !== 200) {
+      return alert(
+        "Користувача з таким іменем не існує! Перевірте чи користувач, якому ви хочете подарувати білет, зареєстрований на нашому сайті."
+      );
+    }
+
     postData = {
       boughtTicket: {
         ticket: ticketsList[selectedGift.value - 1],
-        to: "64e0dcb89886a103eac39528",
+        to: toWhoUser.data.id,
         from: userStore.user.id,
         isGifted: true,
       },

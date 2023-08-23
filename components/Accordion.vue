@@ -100,7 +100,7 @@ onUnmounted(() => {
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1338.1700878522395!2d30.488912908409173!3d50.445524696418246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4cff119855245%3A0xf737537a4443d994!2sEvent%20Hall%20Signal!5e0!3m2!1sen!2sua!4v1692741347158!5m2!1sen!2sua"
         :width="mapWidth"
         class="map"
-        height="300"
+        height="420"
         style="border: 0"
         allowfullscreen="true"
         loading="lazy"
@@ -204,16 +204,16 @@ onUnmounted(() => {
 }
 
 .accordion-active {
-  max-height: 300px;
+  max-height: 420px;
   padding: 12px 16px;
 
   @media screen and (min-width: $vp-mobile) {
-    max-height: 300px;
+    max-height: 420px;
     padding: 16px 20px;
   }
 
   @media screen and (min-width: $vp-tlandscape) {
-    max-height: 300px;
+    max-height: 420px;
     padding: 16px 32px;
   }
 }

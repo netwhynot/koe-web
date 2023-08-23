@@ -7,7 +7,15 @@ export default defineEventHandler(async (event) => {
 
   try {
     const userFilter =
-      userId.length === 24 ? { _id: userId } : { osuId: userId };
+      userId.length === 24
+        ? { _id: userId }
+        : {
+            $or: [
+              { osuId: isNaN(Number(userId)) ? 1 : userId },
+              { username: userId },
+              { email: userId },
+            ],
+          };
 
     const userData = await user.findOne(userFilter);
 
