@@ -7,6 +7,7 @@ import {
 } from "@/server/dbModels/inventory";
 import { ITicket } from "server/dbModels/ticket";
 import { useUserStore } from "@/stores/user";
+import { Types } from "mongoose";
 const userStore = useUserStore();
 
 definePageMeta({
@@ -134,6 +135,7 @@ onMounted(async () => {
             :is-gift="true"
             :ticket-type="(<ITicket>ticket.ticket).type"
             :qr-code="ticket.qrCode!"
+            :gifted-by="<string><unknown>ticket.from!"
           />
         </div>
       </div>

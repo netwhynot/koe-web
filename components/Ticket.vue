@@ -1,6 +1,6 @@
 <script lang="ts" setup>
+import axios from "axios";
 import { ITicket } from "@/server/dbModels/ticket";
-import { IUser } from "@/server/dbModels/user";
 
 const props = defineProps({
   ticket: {
@@ -16,14 +16,16 @@ const props = defineProps({
     default: false,
   },
   giftedBy: {
-    type: Object as () => IUser,
-    default: () => ({}),
+    type: String,
+    default: undefined,
   },
   qrCode: {
     type: String,
     required: true,
   },
 });
+
+let giftedByUser: string | undefined;
 
 const isVIP: Ref<boolean> = ref(props.ticket.type === "VIP");
 
@@ -32,6 +34,12 @@ const ticketStyles: { [key: string]: { html: string; color: string } } = {
   Player: { html: "Гравець", color: "#6441a4" },
   VIP: { html: "VIP", color: "#d31717" },
 };
+
+if (props.isGift) {
+  const giftedByResponse = await axios.get(`/api/users/${props.giftedBy}`);
+
+  giftedByUser = giftedByResponse.data.username;
+}
 </script>
 
 <template>
@@ -53,9 +61,9 @@ const ticketStyles: { [key: string]: { html: string; color: string } } = {
         }}</span>
       </div>
       <div v-if="isGift" class="ticket__gift">
-        <span class="ticket__text">Подаровано від</span>
+        <span class="ticket__text">Подаровано від:</span>
         <span class="ticket__text gift__name">{{
-          props.isGift && props.giftedBy.username ? props.giftedBy.username : ""
+          props.isGift ? giftedByUser : ""
         }}</span>
       </div>
     </div>
