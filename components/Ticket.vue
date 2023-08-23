@@ -29,11 +29,12 @@ let giftedByUser: string | undefined;
 
 const isVIP: Ref<boolean> = ref(props.ticket.type === "VIP");
 
-const ticketStyles: { [key: string]: { html: string; color: string } } = {
-  Spectator: { html: "Учасник", color: "#5662f6" },
-  Player: { html: "Гравець", color: "#6441a4" },
-  VIP: { html: "VIP", color: "#d31717" },
-};
+const ticketStyles: Ref<{ [key: string]: { html: string; color: string } }> =
+  ref({
+    Spectator: { html: "Учасник", color: "#5662f6" },
+    Player: { html: "Гравець", color: "#6441a4" },
+    VIP: { html: "VIP", color: "#d31717" },
+  });
 
 if (props.isGift) {
   const giftedByResponse = await axios.get(`/api/users/${props.giftedBy}`);
@@ -57,13 +58,13 @@ if (props.isGift) {
       <div v-if="!isVIP" class="ticket__type">
         <span class="ticket__text">Тип квитка</span>
         <span class="ticket__text type__name">{{
-          ticketStyles[props.ticket.type].html
+          ticketStyles[ticket.type].html
         }}</span>
       </div>
       <div v-if="isGift" class="ticket__gift">
         <span class="ticket__text">Подаровано від:</span>
         <span class="ticket__text gift__name">{{
-          props.isGift ? giftedByUser : ""
+          isGift ? giftedByUser : ""
         }}</span>
       </div>
     </div>
@@ -98,7 +99,7 @@ if (props.isGift) {
     border-style: solid;
     border-width: 0 0 56px 56px;
     border-color: transparent transparent
-      v-bind("ticketStyles[props.ticket.type].color") transparent;
+      v-bind("ticketStyles[ticket.type].color") transparent;
 
     @media screen and (min-width: $vp-mobile) {
       border-width: 0 0 80px 80px;
@@ -186,7 +187,7 @@ if (props.isGift) {
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background-color: v-bind("ticketStyles[props.ticket.type].color");
+      background-color: v-bind("ticketStyles[ticket.type].color");
       transform: translateY(-50%);
     }
 
@@ -229,7 +230,7 @@ if (props.isGift) {
 }
 
 .type__name {
-  color: v-bind("ticketStyles[props.ticket.type].color");
+  color: v-bind("ticketStyles[ticket.type].color");
   font-family: "Mulish";
   font-size: 16px;
   font-style: normal;

@@ -9,42 +9,43 @@
       <div class="container">
         <div class="staff__members">
           <div class="member">
-            <h5>Holast</h5>
-            <p>Розробка веб-сайту, створення дизайну веб-сайту</p>
+            <h5>alowave</h5>
+            <p>
+              Автор ідеї заходу, розробка веб-сайту, проведення трансляцій,
+              організація турніру, все що ви бачите.
+            </p>
           </div>
           <div class="member right">
-            <h5>alowave23</h5>
+            <h5>Kryterion</h5>
+            <p>Організатор заходу, організація турніру, маппулінг турніру.</p>
+          </div>
+          <div class="member right">
+            <h5>netwhynot</h5>
+            <p>Розробка веб-сайту, верстка.</p>
+          </div>
+          <div class="member">
+            <h5>twqnxx</h5>
             <p>
-              Дизайн оверлею, онлайн-таблиця лідерів, проведення трансляцій,
-              дизайн стікерів, організація турніру
+              Створення дизайну веб-сайту, створення дизайну оверлею трансляцій.
             </p>
           </div>
           <div class="member">
-            <h5>netwhynot</h5>
-            <p>Верстка</p>
-          </div>
-          <div class="member right">
-            <h5>Holast</h5>
-            <p>Розробка веб-сайту, створення дизайну веб-сайту</p>
+            <h5>NN4</h5>
+            <p>Ведучий, допомога в організації заходу, маппулінг турніру.</p>
           </div>
           <div class="member">
-            <h5>Holast</h5>
-            <p>Розробка веб-сайту, створення дизайну веб-сайту</p>
-          </div>
-          <div class="member right">
-            <h5>alowave23</h5>
+            <h5>artem11s</h5>
             <p>
-              Дизайн оверлею, онлайн-таблиця лідерів, проведення трансляцій,
-              дизайн стікерів, організація турніру
+              Допомога у створенні дизайну веб-сайту та оверлею трансляцій,
+              графічний дизайн.
             </p>
           </div>
           <div class="member">
-            <h5>netwhynot</h5>
-            <p>Верстка</p>
-          </div>
-          <div class="member right">
-            <h5>Holast</h5>
-            <p>Розробка веб-сайту, створення дизайну веб-сайту</p>
+            <h5>Bullet4fun</h5>
+            <p>
+              Google Spreadsheets mastermind, допомога в організації та
+              проведенні турніру.
+            </p>
           </div>
         </div>
       </div>
@@ -113,10 +114,64 @@
       right: calc(100% - 48px);
       width: 96px;
       height: 96px;
-      background: url("@/assets/img/avatar.jpg") no-repeat center;
-      background-size: cover;
 
       @include rounded-hex($rotated: true);
+    }
+  }
+
+  &:nth-child(1) {
+    &::before {
+      background: url("https://a.ppy.sh/34106500?1691676191.jpeg") no-repeat
+        center;
+      background-size: cover;
+    }
+  }
+
+  &:nth-child(2) {
+    &::before {
+      background: url("https://a.ppy.sh/9920144?1691676191.jpeg") no-repeat
+        center;
+      background-size: cover;
+    }
+  }
+
+  &:nth-child(4) {
+    &::before {
+      background: url("https://a.ppy.sh/28856490?1691676191.jpeg") no-repeat
+        center;
+      background-size: cover;
+    }
+  }
+
+  &:nth-child(3) {
+    &::before {
+      background: url("https://a.ppy.sh/11794209?1691676191.jpeg") no-repeat
+        center;
+      background-size: cover;
+    }
+  }
+
+  &:nth-child(5) {
+    &::before {
+      background: url("https://a.ppy.sh/9819240?1691676191.jpeg") no-repeat
+        center;
+      background-size: cover;
+    }
+  }
+
+  &:nth-child(6) {
+    &::before {
+      background: url("https://a.ppy.sh/17672006?1691676191.jpeg") no-repeat
+        center;
+      background-size: cover;
+    }
+  }
+
+  &:nth-child(7) {
+    &::before {
+      background: url("https://a.ppy.sh/10113201?1691676191.jpeg") no-repeat
+        center;
+      background-size: cover;
     }
   }
 

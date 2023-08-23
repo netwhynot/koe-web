@@ -5,10 +5,12 @@
       <RichHeading :two-side="true">Донат</RichHeading>
       <p>
         Найпростіший спосіб допомогти КОЕ - це пожертвувати нам гроші. Кожна
-        отримана гривня йде на організацію.
+        отримана гривня йде на покращення заходу.
       </p>
       <!-- TODO: link banka -->
-      <NuxtLink to="">Задонатити</NuxtLink>
+      <NuxtLink target="_blank" to="https://send.monobank.ua/jar/556LBrEDDs"
+        >Задонатити</NuxtLink
+      >
     </div>
     <!-- </div> -->
   </div>
@@ -42,14 +44,14 @@
   }
 
   & > p {
-    max-width: $vp-mobile;
+    max-width: $vp-tlandscape;
     text-align: center;
     font-family: "Mulish";
-    font-size: 16px;
+    font-size: 26px;
     font-style: normal;
     font-weight: 400;
     line-height: 130%; /* 23.4px */
-    color: rgba($color: $secondary, $alpha: 0.8);
+    color: rgba($color: $secondary, $alpha: 1);
   }
 
   & > a {

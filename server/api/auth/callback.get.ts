@@ -56,7 +56,7 @@ export default defineEventHandler(async (event) => {
   if (osuResponse.status !== 200) return;
 
   const userRequest = await axios.get(
-    "http://localhost:3000/api/users/" + osuResponse.data.id,
+    "http://localhost:3035/api/users/" + osuResponse.data.id,
     {
       validateStatus: () => true,
     },

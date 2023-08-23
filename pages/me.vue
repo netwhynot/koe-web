@@ -7,7 +7,6 @@ import {
 } from "@/server/dbModels/inventory";
 import { ITicket } from "server/dbModels/ticket";
 import { useUserStore } from "@/stores/user";
-import { Types } from "mongoose";
 const userStore = useUserStore();
 
 definePageMeta({
