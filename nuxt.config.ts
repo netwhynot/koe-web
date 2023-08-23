@@ -7,6 +7,11 @@ export default defineNuxtConfig({
     mongoose: {
       url: process.env.NUXT_MONGOOSE_URL,
     },
+    osu: {
+      clientId: process.env.OSU_CLIENT_ID,
+      clientSecret: process.env.OSU_CLIENT_SECRET,
+      redirectUri: process.env.OSU_REDIRECT_URI,
+    },
   },
   nitro: {
     preset: "node-server",
