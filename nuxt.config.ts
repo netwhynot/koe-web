@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   // devtools: { enabled: true },
   runtimeConfig: {
     mongoose: {
-      url: process.env.MONGO_URL,
+      url: process.env.NUXT_MONGOOSE_URL,
     },
   },
   nitro: {

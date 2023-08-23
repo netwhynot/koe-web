@@ -99,11 +99,37 @@ const tickets: Ref<ITickets[]> = ref([]);
           </form>
         </div>
         <div v-if="tab === 2" class="content content__tickets">
+<<<<<<< HEAD
           <!-- <Ticket v-for="ticket of tickets" :key="ticket.ticket" /> -->
           <div v-if="tickets.length <= 0" class="no-tickets">
             <p>Схоже, у Вас ще немає жодного квитка</p>
             <NuxtLink to="/buy">купити квиток</NuxtLink>
           </div>
+=======
+          <Ticket
+<<<<<<< HEAD
+            v-for="ticket of tickets"
+            :key="ticket.id"
+            :ticket-type="ticket.type"
+            :gift="ticket.gift"
+=======
+            v-for="ticket of ownTickets"
+            :key="new Date(ticket.createdAt).getTime()"
+            :ticket="<ITicket>ticket.ticket"
+            :ticket-type="(<ITicket>ticket.ticket).type"
+            :qr-code="ticket.qrCode!"
+          />
+          <Ticket
+            v-for="ticket of giftedTickets"
+            :key="new Date(ticket.giftedAt).getTime()"
+            :ticket="<ITicket>ticket.ticket"
+            :is-gift="true"
+            :ticket-type="(<ITicket>ticket.ticket).type"
+            :qr-code="ticket.qrCode!"
+            :gifted-by="<string><unknown>ticket.from!"
+>>>>>>> 458e642... niga
+          />
+>>>>>>> b284a53ce3485ccd404051302fb0c830375e7dfe
         </div>
       </div>
     </div>
