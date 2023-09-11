@@ -26,7 +26,7 @@ const props = defineProps({
 
 const isVIP: Ref<boolean> = ref(props.ticketType === "VIP");
 const isGift: Ref<boolean> = ref(
-  // eslint-disable-next-line comma-dangle, prettier/prettier
+  // eslint-disable-next-line prettier/prettier
   props.gift && Object.keys(props.gift).length !== 0
 );
   qrCode: {
@@ -39,12 +39,21 @@ let giftedByUser: string | undefined;
 
 const isVIP: Ref<boolean> = ref(props.ticket.type === "VIP");
 
+<<<<<<< HEAD
 const ticketTypes: { [key: string]: { html: string; color: string } } = {
   Participant: { html: "Учасник", color: "#5662f6" },
   Player: { html: "Гравець", color: "#6441a4" },
   Staff: { html: "Організатор", color: "#e00087" },
   VIP: { html: "VIP", color: "#d31717" },
 };
+=======
+const ticketStyles: Ref<{ [key: string]: { html: string; color: string } }> =
+  ref({
+    Spectator: { html: "Учасник", color: "#5662f6" },
+    Player: { html: "Гравець", color: "#6441a4" },
+    VIP: { html: "VIP", color: "#d31717" },
+  });
+>>>>>>> 9941f0c... wer
 
 if (props.isGift) {
   const giftedByResponse = await axios.get(`/api/users/${props.giftedBy}`);
@@ -64,7 +73,11 @@ if (props.isGift) {
       <div v-if="!isVIP" class="ticket__type">
         <span class="ticket__text">Тип квитка</span>
         <span class="ticket__text type__name">{{
+<<<<<<< HEAD
           ticketTypes[props.ticketType].html
+=======
+          ticketStyles[ticket.type].html
+>>>>>>> 9941f0c... wer
         }}</span>
       </div>
       <div v-if="isGift" class="ticket__gift">
@@ -73,12 +86,16 @@ if (props.isGift) {
         }}</span>
         <span class="ticket__text">Подаровано від:</span>
         <span class="ticket__text gift__name">{{
+<<<<<<< HEAD
           props.gift && props.gift.giftFrom
             ? props.gift.giftFrom
             : props.gift && props.gift.giftedTo
             ? props.gift.giftedTo
             : ""
           props.isGift ? giftedByUser : ""
+=======
+          isGift ? giftedByUser : ""
+>>>>>>> 9941f0c... wer
         }}</span>
       </div>
     </div>
@@ -108,7 +125,11 @@ if (props.isGift) {
     border-style: solid;
     border-width: 0 0 56px 56px;
     border-color: transparent transparent
+<<<<<<< HEAD
       v-bind("ticketTypes[props.ticketType].color") transparent;
+=======
+      v-bind("ticketStyles[ticket.type].color") transparent;
+>>>>>>> 9941f0c... wer
 
     @media screen and (min-width: $vp-mobile) {
       border-width: 0 0 80px 80px;
@@ -174,7 +195,11 @@ if (props.isGift) {
       width: 8px;
       height: 8px;
       border-radius: 50%;
+<<<<<<< HEAD
       background-color: v-bind("ticketTypes[props.ticketType].color");
+=======
+      background-color: v-bind("ticketStyles[ticket.type].color");
+>>>>>>> 9941f0c... wer
       transform: translateY(-50%);
     }
 
@@ -213,7 +238,11 @@ if (props.isGift) {
 }
 
 .type__name {
+<<<<<<< HEAD
   color: v-bind("ticketTypes[props.ticketType].color");
+=======
+  color: v-bind("ticketStyles[ticket.type].color");
+>>>>>>> 9941f0c... wer
   font-family: "Mulish";
   font-size: 16px;
   font-style: normal;
